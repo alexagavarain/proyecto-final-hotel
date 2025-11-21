@@ -2,6 +2,8 @@ package proyectoFinalHotel;
 
 public class MainHotel {
 	public static void main(String[] args) {
-		System.out.println("Segundo commit");
+		
+		Huesped huesped = new Huesped("Alexa", 19, "612", "gmail", "VIP");
+		
 	}
 }
