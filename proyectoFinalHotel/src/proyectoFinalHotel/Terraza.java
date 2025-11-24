@@ -2,15 +2,23 @@ package proyectoFinalHotel;
 
 public class Terraza extends Habitacion {
 	
-	private double extra = 0.1;
+	private double extraVista = 200;
 	
 	public Terraza(String clave, int ocupacionMaxima, double precioPorNoche) {
 		super(clave, ocupacionMaxima, precioPorNoche);
 	}
 	
+	public double getExtraVista() {
+		return extraVista;
+	}
+
+	public void setExtraVista(double extraVista) {
+		this.extraVista = extraVista;
+	}
+
 	public double calcularCosto() {
 		double costo = super.calcularCosto();
-		costo += costo*extra;
+		costo += costo*extraVista;
 		return costo;
 	}
 
