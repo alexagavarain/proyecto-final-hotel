@@ -7,6 +7,10 @@ public abstract class Persona {
 	protected String telefono;
 	protected String email;
 	
+	public Persona() {
+		this.nombre = "Sin titular";
+	}
+	
 	public Persona(String nombre, int edad, String telefono, String email) {
 		this.nombre = nombre;
 		this.edad = edad;
@@ -47,8 +51,11 @@ public abstract class Persona {
 	}
 	
 	public String toString() {
-		return "Nombre:" + nombre +
-				"\nEdad: " + edad +
+		if (nombre.equals("Sin titular")) {
+			return "Sin titular";
+		}
+		return " Nombre: " + nombre +
+				"\n Edad: " + edad +
 				"\n Telefono: " + telefono +
 				"\n Email: " + email;
 	}

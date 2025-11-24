@@ -6,6 +6,16 @@ public class Huesped extends Persona {
 	Servicio[] serviciosContratados;
 	int numServicios;
 	
+	public Huesped() {
+	}
+	
+	public Huesped(String nombre, int edad, String telefono, String email, String tipoMembresia) {
+		super(nombre, edad, telefono, email);
+		this.tipoMembresia = tipoMembresia;
+		
+		serviciosContratados = new Servicio[100];
+	}
+	
 	public String getTipoMembresia() {
 		return tipoMembresia;
 	}
@@ -28,13 +38,6 @@ public class Huesped extends Persona {
 
 	public void setNumServicios(int numServicios) {
 		this.numServicios = numServicios;
-	}
-
-	public Huesped(String nombre, int edad, String telefono, String email, String tipoMembresia) {
-		super(nombre, edad, telefono, email);
-		this.tipoMembresia = tipoMembresia;
-		
-		serviciosContratados = new Servicio[100];
 	}
 	
 	public double porcentajeDescuento() {
