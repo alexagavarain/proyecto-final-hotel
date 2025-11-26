@@ -4,6 +4,7 @@ public class MainHotel {
 	public static void main(String[] args) {
 		
 		Huesped huesped = new Huesped("Alexa", 19, "612", "gmail", "VIP");
+		Huesped huesped2 = new Huesped("Alexo", 19, "612", "gmail", "VIP");
 //		
 //		Huesped noHuesped = new Huesped();
 //		System.out.println(noHuesped);
@@ -20,11 +21,18 @@ public class MainHotel {
 		Hotel hotel = new Hotel();
 		
 		
-		System.out.println(hotel.reservarHabitacion(huesped, "A1", 1, 1));
-		System.out.println(habitacion.ocupar());
+		System.out.println(hotel.reservarHabitacion(huesped, "A2", 1, 1));
+		System.out.println(hotel.reservarHabitacion(huesped2, "B1", 1, 1));
+		System.out.println(hotel.reservarHabitacion(huesped, "C1", 1, 1));
+		System.out.println(hotel.checkIn(huesped, "A1"));
+		
+		huesped.contratarServicio(new Servicio("Baño", 300));
 		
 		hotel.verDisponibilidad();
+		hotel.verRegistroHuespedes();
 
+		System.out.println(hotel.buscarHuesped("Alexo"));
+		hotel.verIngresosTotales();
 		
 	}
 }

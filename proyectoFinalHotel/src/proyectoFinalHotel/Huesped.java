@@ -63,6 +63,16 @@ public class Huesped extends Persona {
 		return false;
 	}
 	
+	public double calcularCostoServicios() {
+		double total = 0;
+		for (int i = 0; i < serviciosContratados.length; i++) {
+			if (serviciosContratados[i] != null) {
+				total += serviciosContratados[i].getCosto();
+			}
+		}
+		return total;
+	}
+	
 	public void mostrarServiciosContratados() {
 		for (int i = 0; i < serviciosContratados.length; i++) {
 			if (serviciosContratados[i] != null) {
