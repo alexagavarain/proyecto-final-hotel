@@ -70,4 +70,6 @@ public class Huesped extends Persona {
 			}
 		}
 	}
+	
+	//TODO toString
 }
