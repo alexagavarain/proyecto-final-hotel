@@ -1,7 +1,5 @@
 package proyectoFinalHotel;
 
-import java.util.Iterator;
-
 public class Hotel {
 	
 	private Habitacion[][] habitaciones = new Habitacion[4][5];
@@ -60,6 +58,16 @@ public class Hotel {
 		return null;
 	}
 	
+	public Habitacion buscarHabitacion(String clave) {
+		for (int i = 0; i < habitaciones.length; i++) {
+			for (int j = 0; j < habitaciones[i].length; j++) {
+				if (habitaciones[i][j].getClave().equalsIgnoreCase(clave)) {
+					return habitaciones[i][j];
+				}
+			}
+		}
+		return null;
+	}
 
 	public boolean reservarHabitacion(Huesped huesped, String clave, int cantidadHuespedes, int cantidadNoches) {
 		for (int i = 0; i < habitaciones.length; i++) {
@@ -118,6 +126,18 @@ public class Hotel {
 		}
 	}
 	
+	public double cobrar(String nombre, String clave) {
+		Huesped huesped = buscarHuesped(nombre);
+		Habitacion habitacion = buscarHabitacion(clave);
+		double total = 0;
+		if (huesped != null && habitacion.getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
+			total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
+			total -= (total*huesped.porcentajeDescuento());
+			return total;
+		}
+		return 17;
+	}
+	
 	public void verIngresosTotales() {
 		double totalTerraza = 0;
 		double totalJardinPrivado = 0;
@@ -129,7 +149,7 @@ public class Hotel {
 			for (int j = 0; j < habitaciones[i].length; j++) {
 				if (habitaciones[i][j].isReservada()) {
 					if (i == 0) {
-						totalVistalAlberca += habitaciones[i][j].calcularCosto();
+						totalVistalAlberca += cobrar(habitaciones[i][j].getHuespedTitular().getNombre(), habitaciones[i][i].getClave());
 					}
 					if (i == 1) {
 						totalJardinPrivado += habitaciones[i][j].calcularCosto();

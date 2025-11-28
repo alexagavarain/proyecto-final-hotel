@@ -22,17 +22,14 @@ public class MainHotel {
 		
 		
 		System.out.println(hotel.reservarHabitacion(huesped, "A2", 1, 1));
-		System.out.println(hotel.reservarHabitacion(huesped2, "B1", 1, 1));
-		System.out.println(hotel.reservarHabitacion(huesped, "C1", 1, 1));
-		System.out.println(hotel.checkIn(huesped, "A1"));
+		System.out.println(hotel.checkIn(huesped, "A2"));
 		
-		huesped.contratarServicio(new Servicio("Baño", 300));
+		System.out.println(huesped.contratarServicio(new Servicio("Baño", 300)));
 		
-		hotel.verDisponibilidad();
-		hotel.verRegistroHuespedes();
-
-		System.out.println(hotel.buscarHuesped("Alexo"));
+		System.out.println(hotel.cobrar("Alexa", "A2"));
 		hotel.verIngresosTotales();
+
+		
 		
 	}
 }
