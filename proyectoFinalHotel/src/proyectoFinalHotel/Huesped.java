@@ -1,5 +1,7 @@
 package proyectoFinalHotel;
 
+import java.util.Arrays;
+
 public class Huesped extends Persona {
 	
 	String tipoMembresia;
@@ -80,4 +82,11 @@ public class Huesped extends Persona {
 			}
 		}
 	}
+
+	@Override
+	public String toString() {
+		
+		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + Arrays.toString(serviciosContratados)+ "   |   " + numServicios ;
+	}
+	
 }
