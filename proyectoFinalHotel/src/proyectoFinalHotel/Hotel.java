@@ -171,8 +171,14 @@ public class Hotel {
 							"\n\nSERVICIOS\n " + totalServicios);
 	}
 	
-	
-	
+	public Habitacion[][] getHabitaciones() {
+	    return habitaciones;
+	}
+
+	public Huesped[] getRegistroHuespedes() {
+		return registroHuespedes; 
+	}
+
 	
 
 }
