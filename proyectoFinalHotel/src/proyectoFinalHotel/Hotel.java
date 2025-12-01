@@ -135,7 +135,7 @@ public class Hotel {
 			total -= (total*huesped.porcentajeDescuento());
 			return total;
 		}
-		return 17;
+		return 0;
 	}
 	
 	public void verIngresosTotales() {
@@ -149,7 +149,7 @@ public class Hotel {
 			for (int j = 0; j < habitaciones[i].length; j++) {
 				if (habitaciones[i][j].isReservada()) {
 					if (i == 0) {
-						totalVistalAlberca += cobrar(habitaciones[i][j].getHuespedTitular().getNombre(), habitaciones[i][i].getClave());
+						totalVistalAlberca += habitaciones[i][j].calcularCosto();
 					}
 					if (i == 1) {
 						totalJardinPrivado += habitaciones[i][j].calcularCosto();
