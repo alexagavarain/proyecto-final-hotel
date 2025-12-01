@@ -1,85 +1,68 @@
 package proyectoFinalHotel;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class DemoFrame extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private Hotel hotel = new Hotel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DemoFrame frame = new DemoFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public DemoFrame() {
+    	getContentPane().setBackground(new Color(255, 128, 128));
+        setTitle("Sistema de Hotel");
+        setSize(784, 640);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-	/**
-	 * Create the frame.
-	 */
-	public DemoFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 556);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 128));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel Titulo = new JLabel("Hotel \"El buen descanso\"");
-		Titulo.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 17));
-		Titulo.setBounds(293, 58, 152, 12);
-		contentPane.add(Titulo);
-		
-		JButton verRegistro = new JButton("Ver registro huéspedes");
-		verRegistro.setBounds(105, 280, 152, 41);
-		contentPane.add(verRegistro);
-		
-		JButton buscarHuesped = new JButton("Buscar huésped");
-		buscarHuesped.setBounds(105, 331, 152, 41);
-		contentPane.add(buscarHuesped);
-		
-		JButton reservarHabitacion = new JButton("Reservar habitacion");
-		reservarHabitacion.setBounds(105, 382, 152, 41);
-		contentPane.add(reservarHabitacion);
-		
-		JButton checkIn = new JButton("Check in");
-		checkIn.setBounds(105, 433, 152, 41);
-		contentPane.add(checkIn);
-		
-		JButton checkOut = new JButton("Check out");
-		checkOut.setBounds(441, 280, 152, 41);
-		contentPane.add(checkOut);
-		
-		JButton verDisponibilidad = new JButton("Ver disponibilidad");
-		verDisponibilidad.setBounds(441, 331, 152, 41);
-		contentPane.add(verDisponibilidad);
-		
-		JButton verIngresos = new JButton("Ver ingresos");
-		verIngresos.setBounds(441, 382, 152, 41);
-		contentPane.add(verIngresos);
-		
-		JButton buscarHuesped_3 = new JButton("Buscar huésped");
-		buscarHuesped_3.setBounds(441, 433, 152, 41);
-		contentPane.add(buscarHuesped_3);
+        JButton btnReservar = new JButton("Reservar habitación");
+        btnReservar.setBounds(48, 230, 256, 49);
+        JButton btnCheckIn = new JButton("Check-In");
+        btnCheckIn.setBounds(393, 230, 261, 49);
+        JButton btnCheckOut = new JButton("Check-Out");
+        btnCheckOut.setBounds(48, 290, 256, 49);
+        JButton btnDisponibilidad = new JButton("Ver disponibilidad");
+        btnDisponibilidad.setBounds(48, 358, 256, 49);
+        
+        JButton btnRegistro = new JButton("Ver registro de huéspedes");
+        btnRegistro.setBounds(48, 418, 256, 49);
+        getContentPane().setLayout(null);
 
-	}
+        getContentPane().add(btnReservar);
+        getContentPane().add(btnCheckIn);
+        getContentPane().add(btnCheckOut);
+        getContentPane().add(btnDisponibilidad);
+        getContentPane().add(btnRegistro);
+        
+        JButton btnBuscarHuesped = new JButton("Buscar huesped");
+        btnBuscarHuesped.setBounds(393, 290, 261, 49);
+        getContentPane().add(btnBuscarHuesped);
+        
+        JButton btnVerIngresos = new JButton("Ver ingresos");
+        btnVerIngresos.setBounds(393, 358, 261, 49);
+        getContentPane().add(btnVerIngresos);
+        
+        JLabel lblNewLabel = new JLabel("Sistema de hotel");
+        lblNewLabel.setFont(new Font("Tw Cen MT Condensed", Font.BOLD | Font.ITALIC, 50));
+        lblNewLabel.setBounds(178, 66, 323, 79);
+        getContentPane().add(lblNewLabel);
+
+        // Abrir ventanas
+        btnReservar.addActionListener(e -> new VentanaReservar(hotel));
+        btnCheckIn.addActionListener(e -> new VentanaCheckIn(hotel));
+        btnCheckOut.addActionListener(e -> new VentanaCheckOut(hotel));
+        btnDisponibilidad.addActionListener(e -> new VentanaVerDisponibilidad(hotel));
+        btnBuscarHuesped.addActionListener(e -> new VentanaBuscarHuesped(hotel));
+        btnVerIngresos.addActionListener(e -> new VentanaIngresos(hotel));
+        btnRegistro.addActionListener(e -> {
+            VentanaVerRegistroHuespedes vr = new VentanaVerRegistroHuespedes(hotel);
+            vr.setVisible(true);
+        });
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new DemoFrame();
+    }
 }

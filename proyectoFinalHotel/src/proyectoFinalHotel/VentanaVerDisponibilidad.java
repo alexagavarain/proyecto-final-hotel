@@ -1,0 +1,78 @@
+package proyectoFinalHotel;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class VentanaVerDisponibilidad extends JFrame {
+
+    private Hotel hotel;
+
+    public VentanaVerDisponibilidad(Hotel hotel) {
+    	getContentPane().setBackground(new Color(255, 128, 128));
+        this.hotel = hotel;
+
+        setTitle("Disponibilidad del Hotel");
+        setSize(700, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new BorderLayout());
+
+        JLabel titulo = new JLabel("Mapa de Disponibilidad de Habitaciones", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        getContentPane().add(titulo, BorderLayout.NORTH);
+
+        // Panel central con grid
+        JPanel panelGrid = new JPanel();
+        panelGrid.setBackground(new Color(255, 128, 128));
+        panelGrid.setLayout(new GridLayout(4, 5, 10, 10));
+        panelGrid.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        getContentPane().add(panelGrid, BorderLayout.CENTER);
+
+        Habitacion[][] habs = hotel.getHabitaciones();
+
+        // Llenar el grid
+        for (int i = 0; i < habs.length; i++) {
+            for (int j = 0; j < habs[i].length; j++) {
+
+                Habitacion h = habs[i][j];
+
+                JPanel tarjeta = new JPanel();
+                tarjeta.setLayout(new BoxLayout(tarjeta, BoxLayout.Y_AXIS));
+                tarjeta.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                tarjeta.setBackground(Color.WHITE);
+                tarjeta.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true)); // bordes redondeados
+
+                JLabel lblClave = new JLabel("Hab: " + h.getClave());
+                lblClave.setFont(new Font("Segoe UI", Font.BOLD, 16));
+                lblClave.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                JLabel lblTipo = new JLabel(h.getClass().getSimpleName());
+                lblTipo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                lblTipo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                JLabel lblEstado = new JLabel(h.isReservada() ? "RESERVADA" : "DISPONIBLE");
+                lblEstado.setFont(new Font("Segoe UI", Font.BOLD, 14));
+                lblEstado.setAlignmentX(Component.CENTER_ALIGNMENT);
+                lblEstado.setForeground(Color.WHITE);
+
+                JPanel panelEstado = new JPanel();
+                panelEstado.setMaximumSize(new Dimension(120, 30));
+                panelEstado.setBackground(h.isReservada() ? new Color(200, 50, 50) : new Color(60, 170, 60));
+                panelEstado.add(lblEstado);
+
+                tarjeta.add(lblClave);
+                tarjeta.add(Box.createVerticalStrut(5));
+                tarjeta.add(lblTipo);
+                tarjeta.add(Box.createVerticalStrut(10));
+                tarjeta.add(panelEstado);
+
+                panelGrid.add(tarjeta);
+            }
+        }
+
+        setVisible(true);
+    }
+}
+
+
