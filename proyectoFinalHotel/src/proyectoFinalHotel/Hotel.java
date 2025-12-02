@@ -4,6 +4,9 @@ public class Hotel {
 	
 	private Habitacion[][] habitaciones = new Habitacion[4][5];
 	private Huesped[] registroHuespedes = new Huesped[20];;
+	private double ingresosHabitaciones = 0;
+	private double ingresosServicios = 0;
+
 	
 	RegistroIngresos registro = new RegistroIngresos();
 	
@@ -62,14 +65,25 @@ public class Hotel {
 	
 	
 	public Huesped buscarHuesped(String nombre) {
-		for (int i = 0; i < habitaciones.length; i++) {
-			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j].getHuespedTitular()!= null && habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
-					return habitaciones[i][j].getHuespedTitular();
-				}
-			}
-		}
-		return null;
+//		for (int i = 0; i < habitaciones.length; i++) {
+//			for (int j = 0; j < habitaciones[i].length; j++) {
+//				if (habitaciones[i][j].getHuespedTitular()!= null && habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
+//					return habitaciones[i][j].getHuespedTitular();
+//				}
+//			}
+//		}
+//		return null;
+	    for (int i = 0; i < habitaciones.length; i++) {
+	        for (int j = 0; j < habitaciones[i].length; j++) {
+
+	            Huesped huesped = habitaciones[i][j].getHuespedTitular();
+
+	            if (huesped != null && huesped.getNombre().equalsIgnoreCase(nombre)) {
+	                return huesped;
+	            }
+	        }
+	    }
+	    return null;
 	}
 
 	public boolean reservarHabitacion(Huesped huesped, String clave, int cantidadHuespedes, int cantidadNoches) {
@@ -131,25 +145,50 @@ public class Hotel {
 	}
 	
 	public boolean cobrar(Huesped huesped, String clave) {
+//		Habitacion habitacion = buscarHabitacion(clave);
+//		
+//		if (habitacion == null || habitacion.getHuespedTitular() == null) {
+//			return false;
+//		}	
+//		
+//		if (!confirmarHuesped(huesped, clave)) {
+//			return false;
+//		}
+//	
+//		double total = 0;
+//		total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
+//		total -= (total*huesped.porcentajeDescuento());
+//		
+//		registro.registrarCobro(new Ingreso(total, huesped, habitacion));
+//		huesped.darDeBaja();
+//		eliminarHuesped(huesped);
+//				
+//		return true;
+
 		Habitacion habitacion = buscarHabitacion(clave);
-		
-		if (habitacion == null || habitacion.getHuespedTitular() == null) {
-			return false;
-		}	
-		
-		if (!confirmarHuesped(huesped, clave)) {
-			return false;
-		}
-	
-		double total = 0;
-		total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
-		total -= (total*huesped.porcentajeDescuento());
-		
-		registro.registrarCobro(new Ingreso(total, huesped, habitacion));
-		huesped.darDeBaja();
-		eliminarHuesped(huesped);
-				
-		return true;
+
+	    if (habitacion == null || habitacion.getHuespedTitular() == null) {
+	        return false;
+	    }
+
+	    if (!confirmarHuesped(huesped, clave)) {
+	        return false;
+	    }
+
+	    double costoHab = habitacion.calcularCosto();
+	    double costoServ = huesped.calcularCostoServicios();
+
+	    double total = costoHab + costoServ;
+	    total -= (total * huesped.porcentajeDescuento());
+
+
+	    ingresosHabitaciones += costoHab;
+	    ingresosServicios += costoServ;
+
+	    huesped.darDeBaja();
+	    eliminarHuesped(huesped);
+
+	    return true;
 	}
 
 	public void eliminarHuesped(Huesped huesped) {
@@ -164,7 +203,36 @@ public class Hotel {
 	
 	public void verIngresosTotales() {
 		registro.imprimirRegistro();
+
+	    double totalTerraza = 0;
+	    double totalJardinPrivado = 0;
+	    double totalVistaAlberca = 0;
+	    double totalVistaAlMar = 0;
+	    double totalServicios = 0;
+
+	    for (int i = 0; i < habitaciones.length; i++) {
+	        for (int j = 0; j < habitaciones[i].length; j++) {
+	            
+	            Habitacion h = habitaciones[i][j];
+
+	            if (h instanceof Terraza)
+	                totalTerraza += h.getIngresosGenerados();
+	            else if (h instanceof JardinPrivado)
+	                totalJardinPrivado += h.getIngresosGenerados();
+	            else if (h instanceof VistaAlberca)
+	                totalVistaAlberca += h.getIngresosGenerados();
+	            else if (h instanceof VistaAlMar)
+	                totalVistaAlMar += h.getIngresosGenerados();
+	        }
+	    }
+
+	    System.out.println("HABITACIONES\n Vista alberca: " + totalVistaAlberca +
+	                        "\n Jardin privado: " + totalJardinPrivado +
+	                        "\n Vista al mar: " + totalVistaAlMar +
+	                        "\n Terraza: " + totalTerraza +
+	                        "\n\nSERVICIOS\n " + totalServicios);
 	}
+
 	
 	public Habitacion[][] getHabitaciones() {
 	    return habitaciones;
@@ -174,6 +242,13 @@ public class Hotel {
 		return registroHuespedes; 
 	}
 
-	
+	public double getIngresosHabitaciones() {
+	    return ingresosHabitaciones;
+	}
+
+	public double getIngresosServicios() {
+	    return ingresosServicios;
+	}
+
 
 }

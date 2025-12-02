@@ -8,11 +8,11 @@ public class VentanaVerDisponibilidad extends JFrame {
     private Hotel hotel;
 
     public VentanaVerDisponibilidad(Hotel hotel) {
-    	getContentPane().setBackground(new Color(255, 128, 128));
+        getContentPane().setBackground(new Color(255, 128, 128));
         this.hotel = hotel;
 
         setTitle("Disponibilidad del Hotel");
-        setSize(700, 500);
+        setSize(1023, 864);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
@@ -22,7 +22,6 @@ public class VentanaVerDisponibilidad extends JFrame {
         titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(titulo, BorderLayout.NORTH);
 
-        // Panel central con grid
         JPanel panelGrid = new JPanel();
         panelGrid.setBackground(new Color(255, 128, 128));
         panelGrid.setLayout(new GridLayout(4, 5, 10, 10));
@@ -31,7 +30,6 @@ public class VentanaVerDisponibilidad extends JFrame {
 
         Habitacion[][] habs = hotel.getHabitaciones();
 
-        // Llenar el grid
         for (int i = 0; i < habs.length; i++) {
             for (int j = 0; j < habs[i].length; j++) {
 
@@ -39,9 +37,8 @@ public class VentanaVerDisponibilidad extends JFrame {
 
                 JPanel tarjeta = new JPanel();
                 tarjeta.setLayout(new BoxLayout(tarjeta, BoxLayout.Y_AXIS));
-                tarjeta.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 tarjeta.setBackground(Color.WHITE);
-                tarjeta.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true)); // bordes redondeados
+                tarjeta.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true));
 
                 JLabel lblClave = new JLabel("Hab: " + h.getClave());
                 lblClave.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -67,6 +64,21 @@ public class VentanaVerDisponibilidad extends JFrame {
                 tarjeta.add(Box.createVerticalStrut(10));
                 tarjeta.add(panelEstado);
 
+                if (!h.isReservada()) {
+                    JButton btnReservar = new JButton("Reservar");
+                    btnReservar.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    btnReservar.setBackground(new Color(60, 170, 60));
+                    btnReservar.setForeground(Color.WHITE);
+
+                    btnReservar.addActionListener(e -> {
+                        new VentanaReservar(hotel, h);
+                        dispose();
+                    });
+
+                    tarjeta.add(Box.createVerticalStrut(10));
+                    tarjeta.add(btnReservar);
+                }
+
                 panelGrid.add(tarjeta);
             }
         }
@@ -74,5 +86,7 @@ public class VentanaVerDisponibilidad extends JFrame {
         setVisible(true);
     }
 }
+
+
 
 
