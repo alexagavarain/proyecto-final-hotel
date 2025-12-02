@@ -72,12 +72,16 @@ public class Huesped extends Persona {
 		return total;
 	}
 	
-	public void mostrarServiciosContratados() {
-		for (int i = 0; i < serviciosContratados.length; i++) {
-			if (serviciosContratados[i] != null) {
-				System.out.println(serviciosContratados[i].toString());
-			}
-		}
+	public String mostrarServiciosContratados() {
+	    String resultado = "";
+
+	    for (int i = 0; i < serviciosContratados.length; i++) {
+	        if (serviciosContratados[i] != null) {
+	            resultado += serviciosContratados[i].toString() + " | ";
+	        }
+	    }
+
+	    return resultado;
 	}
 	
 	public void darDeBaja() {
@@ -90,7 +94,7 @@ public class Huesped extends Persona {
 
 	@Override
 	public String toString() {
-		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + Arrays.toString(serviciosContratados)+ "   |   " + numServicios ;
+		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + mostrarServiciosContratados() + "   |   " + numServicios;
 	}
 	
 }

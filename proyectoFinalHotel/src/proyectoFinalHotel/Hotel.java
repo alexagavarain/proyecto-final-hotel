@@ -5,6 +5,8 @@ public class Hotel {
 	private Habitacion[][] habitaciones = new Habitacion[4][5];
 	private Huesped[] registroHuespedes = new Huesped[20];;
 	
+	RegistroIngresos registro = new RegistroIngresos();
+	
 	public Hotel() {
 		habitaciones[0][0] = new VistaAlberca("A1", 10, 3000);
 		habitaciones[0][1] = new VistaAlberca("A2", 3, 2000);
@@ -62,7 +64,7 @@ public class Hotel {
 	public Huesped buscarHuesped(String nombre) {
 		for (int i = 0; i < habitaciones.length; i++) {
 			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
+				if (habitaciones[i][j].getHuespedTitular()!= null && habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
 					return habitaciones[i][j].getHuespedTitular();
 				}
 			}
@@ -143,6 +145,7 @@ public class Hotel {
 		total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
 		total -= (total*huesped.porcentajeDescuento());
 		
+		registro.registrarCobro(new Ingreso(total, huesped, habitacion));
 		huesped.darDeBaja();
 		eliminarHuesped(huesped);
 				
@@ -160,17 +163,7 @@ public class Hotel {
 	}
 	
 	public void verIngresosTotales() {
-		double totalTerraza = 0;
-		double totalJardinPrivado = 0;
-		double totalVistalAlberca = 0;
-		double totalVistaAlMar = 0;
-		double totalServicios = 0;
-		
-		System.out.println("HABITACIONES\n Vista alberca: " + totalVistalAlberca +
-							"\n Jardin privado: " + totalJardinPrivado +
-							"\n Vista al mar: " + totalVistaAlMar +
-							"\n Terraza: " + totalTerraza +
-							"\n\nSERVICIOS\n " + totalServicios);
+		registro.imprimirRegistro();
 	}
 	
 	public Habitacion[][] getHabitaciones() {
