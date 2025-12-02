@@ -90,7 +90,7 @@ public class Huesped extends Persona {
 
 	@Override
 	public String toString() {
-		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + Arrays.toString(serviciosContratados)+ "   |   " + numServicios ;
+		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia +  "   |   " + numServicios ;
 	}
 	
 }

@@ -10,6 +10,9 @@ public abstract class Habitacion {
 	protected int cantidadNoches;
 	protected String tipo;
 	protected Huesped huespedTitular;
+	protected double ingresosGenerados;
+	
+
 	
 	public Habitacion(String tipo, String clave, int ocupacionMaxima, double precioPorNoche) {
 		this.tipo = tipo;
@@ -117,6 +120,10 @@ public abstract class Habitacion {
 	
 	public double calcularCosto() {
 		return precioPorNoche*cantidadNoches;
+	}
+	
+	public double getIngresosGenerados() {
+	    return ingresosGenerados;
 	}
 	
 	public String toString() {

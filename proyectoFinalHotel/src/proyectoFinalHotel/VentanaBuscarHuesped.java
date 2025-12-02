@@ -37,7 +37,7 @@ public class VentanaBuscarHuesped extends JFrame {
         JScrollPane scroll = new JScrollPane(areaResultado);
         scroll.setBounds(40, 120, 400, 200);
         getContentPane().add(scroll);
-        scroll.getViewport().setBackground(new Color(240, 240, 240));  // Fondo del área de tabla
+        scroll.getViewport().setBackground(new Color(240, 240, 240)); 
         scroll.setBackground(new Color(255, 128, 128));
 
 
