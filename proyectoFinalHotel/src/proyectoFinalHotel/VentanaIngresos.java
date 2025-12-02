@@ -34,12 +34,12 @@ public class VentanaIngresos extends JFrame {
 
         double totalHabitaciones = hotel.getIngresosHabitaciones();
         double totalServicios = hotel.getIngresosServicios();
-        double totalFinal = totalHabitaciones + totalServicios;
+        double totalFinal = hotel.getIngresosTotales();
 
         area.setText("=== INGRESOS DEL HOTEL ===\n\n");
         area.append("Ingresos por habitaciones: $" + totalHabitaciones + "\n");
         area.append("Ingresos por servicios: $" + totalServicios + "\n\n");
-        area.append("TOTAL: $" + totalFinal + "\n");
+        area.append("INGRESOS TOTALES: $" + totalFinal + "\n");
     }
 }
 

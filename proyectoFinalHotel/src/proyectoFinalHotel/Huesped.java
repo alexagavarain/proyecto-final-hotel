@@ -1,7 +1,5 @@
 package proyectoFinalHotel;
 
-import java.util.Arrays;
-
 public class Huesped extends Persona {
 	
 	String tipoMembresia;

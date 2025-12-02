@@ -2,6 +2,9 @@ package proyectoFinalHotel;
 
 public abstract class Persona {
 	
+	/**
+	 * Clase abstracta que crea un objeto de tipo persona para representar  
+	 * **/
 	protected String nombre;
 	protected int edad;
 	protected String telefono;

@@ -12,8 +12,6 @@ public abstract class Habitacion {
 	protected Huesped huespedTitular;
 	protected double ingresosGenerados;
 	
-
-	
 	public Habitacion(String tipo, String clave, int ocupacionMaxima, double precioPorNoche) {
 		this.tipo = tipo;
 		this.clave = clave;
