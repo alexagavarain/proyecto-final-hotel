@@ -4,7 +4,6 @@ public class Hotel {
 	
 	private Habitacion[][] habitaciones = new Habitacion[4][5];
 	private Huesped[] registroHuespedes = new Huesped[20];;
-	private int habitacionesOcupadas;
 	
 	public Hotel() {
 		habitaciones[0][0] = new VistaAlberca("A1", 10, 3000);
@@ -32,14 +31,6 @@ public class Hotel {
 		habitaciones[3][4] = new Terraza("D5", 10, 3400);
 	}
 	
-	public int getHabitacionesOcupadas() {
-		return habitacionesOcupadas;
-	}
-
-	public void setHabitacionesOcupadas(int habitacionesOcupadas) {
-		this.habitacionesOcupadas = habitacionesOcupadas;
-	}
-	
 	public void verRegistroHuespedes() {
 		for (int i = 0; i < registroHuespedes.length; i++) {
 			if (registroHuespedes[i] != null)
@@ -47,15 +38,13 @@ public class Hotel {
 		}
 	}
 	
-	public Huesped buscarHuesped(String nombre) {
-		for (int i = 0; i < habitaciones.length; i++) {
-			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
-					return habitaciones[i][j].getHuespedTitular();
-				}
-			}
+	public boolean confirmarHuesped(Huesped huesped, String clave) {
+		Habitacion habitacion = buscarHabitacion(clave);
+		
+		if (habitacion != null && habitacion.getHuespedTitular() != null) {
+			return habitacion.getHuespedTitular().comparar(huesped);
 		}
-		return null;
+		return false;
 	}
 	
 	public Habitacion buscarHabitacion(String clave) {
@@ -68,52 +57,65 @@ public class Hotel {
 		}
 		return null;
 	}
-
-	public boolean reservarHabitacion(Huesped huesped, String clave, int cantidadHuespedes, int cantidadNoches) {
+	
+	
+	public Huesped buscarHuesped(String nombre) {
 		for (int i = 0; i < habitaciones.length; i++) {
 			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j].getClave().equals(clave) && !habitaciones[i][j].isReservada()) {
-					habitaciones[i][j].reservar(huesped, cantidadHuespedes, cantidadNoches);
-					registroHuespedes[habitacionesOcupadas] = huesped;
-					habitacionesOcupadas++;
-					return true;
+				if (habitaciones[i][j].getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
+					return habitaciones[i][j].getHuespedTitular();
 				}
+			}
+		}
+		return null;
+	}
+
+	public boolean reservarHabitacion(Huesped huesped, String clave, int cantidadHuespedes, int cantidadNoches) {
+		Habitacion habitacion = buscarHabitacion(clave);
+		
+		if (habitacion != null && !habitacion.isReservada()) {
+			return habitacion.reservar(huesped, cantidadHuespedes, cantidadNoches) && agregarHuesped(huesped);
+		}
+		return false;
+	}
+	
+	public boolean agregarHuesped(Huesped huesped) {	
+		for (int i = 0; i < registroHuespedes.length; i++) {
+			if (registroHuespedes[i] != null && registroHuespedes[i].comparar(huesped)) {
+				return true;
+			}
+		}
+		
+		for (int i = 0; i < registroHuespedes.length; i++) {
+			if (registroHuespedes[i] == null) {
+				registroHuespedes[i] = huesped;
+				return true;
 			}
 		}
 		return false;
 	}
 	
 	public boolean checkIn(Huesped huesped, String clave) {
-		if (buscarHuesped(huesped.getNombre()) != null) {
-			for (int i = 0; i < habitaciones.length; i++) {
-				for (int j = 0; j < habitaciones[i].length; j++) {
-					if (habitaciones[i][j].getHuespedTitular().getNombre().equals(huesped.getNombre()) && habitaciones[i][j].getClave().equals(clave)) {
-						habitaciones[i][j].ocupar();
-						return true;
-					}
-				}
-			}
-		}	
+		Habitacion habitacion = buscarHabitacion(clave);
+
+		if (habitacion != null && habitacion.isReservada() && confirmarHuesped(huesped, clave)) {
+			return habitacion.ocupar();
+		}
 		return false;
 	}
 	
 	public boolean checkOut(Huesped huesped, String clave) {
-		if (buscarHuesped(huesped.getNombre()) != null) {
-			for (int i = 0; i < habitaciones.length; i++) {
-				for (int j = 0; j < habitaciones[i].length; j++) {
-					if (habitaciones[i][j].isOcupada() && habitaciones[i][j].getHuespedTitular().getNombre().equals(huesped.getNombre()) && habitaciones[i][j].getClave().equals(clave)) {
-						habitaciones[i][j].desocupar();
-						return true;
-					}
-				}
-			}
-		}	
+		Habitacion habitacion = buscarHabitacion(clave);
+
+		if (habitacion != null && confirmarHuesped(huesped, clave) && habitacion.isOcupada()) {
+			return cobrar(huesped, clave) && habitacion.desocupar();
+		}
 		return false;
 	}
 	
 	public void verDisponibilidad() {
 		for (int i = 0; i < habitaciones.length; i++) {
-			for (int j = 0; j < habitaciones.length; j++) {
+			for (int j = 0; j < habitaciones[i].length; j++) {
 				System.out.print("[");
 				if (habitaciones[i][j].isReservada()) {
 					System.out.print("X");
@@ -126,16 +128,35 @@ public class Hotel {
 		}
 	}
 	
-	public double cobrar(String nombre, String clave) {
-		Huesped huesped = buscarHuesped(nombre);
+	public boolean cobrar(Huesped huesped, String clave) {
 		Habitacion habitacion = buscarHabitacion(clave);
-		double total = 0;
-		if (huesped != null && habitacion.getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
-			total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
-			total -= (total*huesped.porcentajeDescuento());
-			return total;
+		
+		if (habitacion == null || habitacion.getHuespedTitular() == null) {
+			return false;
+		}	
+		
+		if (!confirmarHuesped(huesped, clave)) {
+			return false;
 		}
-		return 0;
+	
+		double total = 0;
+		total += habitacion.calcularCosto() + huesped.calcularCostoServicios();
+		total -= (total*huesped.porcentajeDescuento());
+		
+		huesped.darDeBaja();
+		eliminarHuesped(huesped);
+				
+		return true;
+	}
+
+	public void eliminarHuesped(Huesped huesped) {
+		for (int i = 0; i < registroHuespedes.length; i++) {
+			if (registroHuespedes[i] != null && registroHuespedes[i].comparar(huesped)) {
+				registroHuespedes[i] = null;
+				break;
+			}
+		}
+		
 	}
 	
 	public void verIngresosTotales() {
@@ -145,25 +166,6 @@ public class Hotel {
 		double totalVistaAlMar = 0;
 		double totalServicios = 0;
 		
-		for (int i = 0; i < habitaciones.length; i++) {
-			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j].isReservada()) {
-					if (i == 0) {
-						totalVistalAlberca += habitaciones[i][j].calcularCosto();
-					}
-					if (i == 1) {
-						totalJardinPrivado += habitaciones[i][j].calcularCosto();
-					}
-					if (i == 2) {
-						totalVistaAlMar += habitaciones[i][j].calcularCosto();
-					}
-					if (i == 3) {
-						totalTerraza += habitaciones[i][j].calcularCosto();
-					}
-					totalServicios += habitaciones[i][j].getHuespedTitular().calcularCostoServicios();
-				}
-			}
-		}
 		System.out.println("HABITACIONES\n Vista alberca: " + totalVistalAlberca +
 							"\n Jardin privado: " + totalJardinPrivado +
 							"\n Vista al mar: " + totalVistaAlMar +

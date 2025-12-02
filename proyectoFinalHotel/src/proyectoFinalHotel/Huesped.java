@@ -8,9 +8,6 @@ public class Huesped extends Persona {
 	Servicio[] serviciosContratados;
 	int numServicios;
 	
-	public Huesped() {
-	}
-	
 	public Huesped(String nombre, int edad, String telefono, String email, String tipoMembresia) {
 		super(nombre, edad, telefono, email);
 		this.tipoMembresia = tipoMembresia;
@@ -82,10 +79,17 @@ public class Huesped extends Persona {
 			}
 		}
 	}
+	
+	public void darDeBaja() {
+		for (int i = 0; i < serviciosContratados.length; i++) {
+			serviciosContratados[i] = null; 				
+		}
+		numServicios = 0;
+	}
+	
 
 	@Override
 	public String toString() {
-		
 		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + Arrays.toString(serviciosContratados)+ "   |   " + numServicios ;
 	}
 	

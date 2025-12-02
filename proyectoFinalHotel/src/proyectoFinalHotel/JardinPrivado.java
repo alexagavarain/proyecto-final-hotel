@@ -5,7 +5,7 @@ public class JardinPrivado extends Habitacion {
 	private double extraAcceso = 350;
 
 	public JardinPrivado(String clave, int ocupacionMaxima, double precioPorNoche) {
-		super(clave, ocupacionMaxima, precioPorNoche);
+		super("Jardín privado", clave, ocupacionMaxima, precioPorNoche);
 	}
 
 	public double getExtraAcceso() {

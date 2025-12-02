@@ -5,7 +5,7 @@ public class Terraza extends Habitacion {
 	private double extraVista = 200;
 	
 	public Terraza(String clave, int ocupacionMaxima, double precioPorNoche) {
-		super(clave, ocupacionMaxima, precioPorNoche);
+		super("Terraza", clave, ocupacionMaxima, precioPorNoche);
 	}
 	
 	public double getExtraVista() {

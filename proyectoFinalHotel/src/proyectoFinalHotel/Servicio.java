@@ -2,8 +2,13 @@ package proyectoFinalHotel;
 
 public class Servicio {
 	
-	private String nombre;
-	private double costo;
+	protected String nombre;
+	protected double costo;
+	
+	public Servicio(String nombre, double costo) {
+		this.nombre = nombre;
+		this.costo = costo;
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -18,11 +23,6 @@ public class Servicio {
 	}
 
 	public void setCosto(double costo) {
-		this.costo = costo;
-	}
-
-	public Servicio(String nombre, double costo) {
-		this.nombre = nombre;
 		this.costo = costo;
 	}
 	

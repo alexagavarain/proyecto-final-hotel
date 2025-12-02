@@ -7,10 +7,6 @@ public abstract class Persona {
 	protected String telefono;
 	protected String email;
 	
-	public Persona() {
-		this.nombre = "Sin titular";
-	}
-	
 	public Persona(String nombre, int edad, String telefono, String email) {
 		this.nombre = nombre;
 		this.edad = edad;
@@ -48,6 +44,10 @@ public abstract class Persona {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean comparar(Persona personaBuscar) {
+		return nombre.equals(personaBuscar.getNombre()) && email.equals(personaBuscar.getEmail());
 	}
 	
 	public String toString() {

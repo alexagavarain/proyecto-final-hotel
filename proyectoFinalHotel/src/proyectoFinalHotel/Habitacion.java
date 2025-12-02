@@ -8,15 +8,23 @@ public abstract class Habitacion {
 	protected boolean reservada;
 	protected boolean ocupada;
 	protected int cantidadNoches;
+	protected String tipo;
 	protected Huesped huespedTitular;
 	
-	public Habitacion(String clave, int ocupacionMaxima, double precioPorNoche) {
+	public Habitacion(String tipo, String clave, int ocupacionMaxima, double precioPorNoche) {
+		this.tipo = tipo;
 		this.clave = clave;
 		this.ocupacionMaxima = ocupacionMaxima;
 		this.precioPorNoche = precioPorNoche;
-		this.reservada = false;
-		this.ocupada = false;
-		this.huespedTitular = new Huesped(); 
+		this.huespedTitular = null; 
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	public String getClave() {
@@ -100,7 +108,9 @@ public abstract class Habitacion {
 		if (ocupada) {
 			reservada = false;
 			ocupada = false;
-			return true;
+	        cantidadNoches = 0;
+	        huespedTitular = null;
+	        return true;
 		}
 		return false;
 	}
@@ -111,12 +121,13 @@ public abstract class Habitacion {
 	
 	public String toString() {
 		return " Clave: " + clave +
+				"\n Tipo: " + tipo +
 				"\n Ocupación máxima: " + ocupacionMaxima +
 				"\n Precio por noche: $" + precioPorNoche +
 				"\n Reservada: " + (reservada ? "Sí" : "No") +
 				"\n Ocupada: " + (ocupada ? "Sí" : "No") +
 				"\n Cantidad de noches: " + cantidadNoches +
-				"\n Huésped titular: " + huespedTitular;
+				"\n Huésped titular: " + (huespedTitular == null ? "Sin titular" : huespedTitular);
 	}
 	
 	
