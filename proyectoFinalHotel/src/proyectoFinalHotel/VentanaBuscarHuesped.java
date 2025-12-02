@@ -15,7 +15,7 @@ public class VentanaBuscarHuesped extends JFrame {
         this.hotel = hotel;
 
         setTitle("Buscar Huésped");
-        setSize(500, 400);
+        setSize(561, 413);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -33,6 +33,7 @@ public class VentanaBuscarHuesped extends JFrame {
         getContentPane().add(btnBuscar);
 
         areaResultado = new JTextArea();
+        areaResultado.setTabSize(10);
         areaResultado.setBackground(new Color(255, 128, 128));
         JScrollPane scroll = new JScrollPane(areaResultado);
         scroll.setBounds(40, 120, 400, 200);

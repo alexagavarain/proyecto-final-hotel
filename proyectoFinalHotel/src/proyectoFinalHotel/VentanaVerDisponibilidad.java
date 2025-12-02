@@ -44,7 +44,7 @@ public class VentanaVerDisponibilidad extends JFrame {
                 lblClave.setFont(new Font("Segoe UI", Font.BOLD, 16));
                 lblClave.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                JLabel lblTipo = new JLabel(h.getClass().getSimpleName());
+                JLabel lblTipo = new JLabel(h.getTipo());
                 lblTipo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
                 lblTipo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
