@@ -2,14 +2,16 @@ package proyectoFinalHotel;
 
 import javax.swing.*;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaIngresos extends JFrame {
 
     private Hotel hotel;
-    private JTextArea area;
+    private JTable tabla;
+    private DefaultTableModel modelo;
 
     public VentanaIngresos(Hotel hotel) {
-        getContentPane().setBackground(new Color(255, 128, 128));
+        getContentPane().setBackground(new Color(238, 238, 238));
         this.hotel = hotel;
 
         setTitle("Ingresos del Hotel");
@@ -18,11 +20,20 @@ public class VentanaIngresos extends JFrame {
         getContentPane().setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        area = new JTextArea();
-        area.setBackground(new Color(255, 128, 128));
-        area.setEditable(false);
-        JScrollPane scroll = new JScrollPane(area);
-        scroll.setBounds(30, 30, 430, 300);
+        String[] columnas = {"Habitaciones", "Servicios", "Total"};
+
+        modelo = new DefaultTableModel(columnas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+
+        tabla = new JTable(modelo);
+        tabla.setRowHeight(25);
+
+        JScrollPane scroll = new JScrollPane(tabla);
+        scroll.setBounds(30, 30, 430, 200);
         getContentPane().add(scroll);
 
         mostrarIngresos();
@@ -36,10 +47,13 @@ public class VentanaIngresos extends JFrame {
         double totalServicios = hotel.getIngresosServicios();
         double totalFinal = hotel.getIngresosTotales();
 
-        area.setText("=== INGRESOS DEL HOTEL ===\n\n");
-        area.append("Ingresos por habitaciones: $" + totalHabitaciones + "\n");
-        area.append("Ingresos por servicios: $" + totalServicios + "\n\n");
-        area.append("INGRESOS TOTALES: $" + totalFinal + "\n");
+        Object[] fila = {
+                totalHabitaciones,
+                totalServicios,
+                totalFinal
+        };
+
+        modelo.addRow(fila);
     }
 }
 

@@ -6,7 +6,7 @@ import java.awt.Color;
 public class VentanaCheckOut extends JFrame {
 
     public VentanaCheckOut(Hotel hotel) {
-    	getContentPane().setBackground(new Color(255, 128, 128));
+    	getContentPane().setBackground(new Color(238, 238, 238));
         setTitle("Check-Out");
         setSize(300, 200);
         setLocationRelativeTo(null);
@@ -20,7 +20,7 @@ public class VentanaCheckOut extends JFrame {
         txtNombre.setBounds(120, 20, 130, 20);
         getContentPane().add(txtNombre);
 
-        JLabel lblClave = new JLabel("Clave hab:");
+        JLabel lblClave = new JLabel("Clave:");
         lblClave.setBounds(20, 60, 100, 20);
         getContentPane().add(lblClave);
 
@@ -34,10 +34,20 @@ public class VentanaCheckOut extends JFrame {
 
         btn.addActionListener(e -> {
             Huesped h = hotel.buscarHuesped(txtNombre.getText());
-            if (h != null && hotel.checkOut(h, txtClave.getText())) {
-                JOptionPane.showMessageDialog(null, "Check-out realizado");
+            
+            if (h == null) {
+            	JOptionPane.showMessageDialog(null, "Huésped no encontrado");
+            	dispose();
+            	return;
+            }
+            
+            String clave = txtClave.getText();
+    		double cantidadCobrar = hotel.calcularPrecio(h, clave);
+            
+    		if (hotel.checkOut(h, clave)) {
+                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
             } else {
-                JOptionPane.showMessageDialog(null, "Error en check-out");
+                JOptionPane.showMessageDialog(null, "No se pudo hacer check-out");
             }
             dispose();
         });

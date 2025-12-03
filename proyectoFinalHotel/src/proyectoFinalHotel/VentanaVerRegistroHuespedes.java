@@ -10,24 +10,24 @@ public class VentanaVerRegistroHuespedes extends JFrame {
     private JTable tabla;
 
     public VentanaVerRegistroHuespedes(Hotel hotel) {
-    	getContentPane().setBackground(new Color(255, 128, 128));
+    	getContentPane().setBackground(new Color(238, 238, 238));
         this.hotel = hotel;
 
-        setTitle("Registro de Huéspedes");
+        setTitle("Registro de huéspedes");
         setSize(750, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
 
 
-        JLabel titulo = new JLabel("Registro de Huéspedes", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Registro de huéspedes", SwingConstants.CENTER);
         titulo.setBackground(new Color(255, 128, 128));
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setFont(new Font("Monospaced", Font.BOLD, 22));
         titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(titulo, BorderLayout.NORTH);
 
 
-        String[] columnas = {"Nombre", "Edad", "Teléfono", "Email", "Membresía", "Servicios contratados"};
+        String[] columnas = {"Nombre", "Edad", "Teléfono", "Email", "Membresía", "Servicios"};
 
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
             @Override
@@ -37,7 +37,7 @@ public class VentanaVerRegistroHuespedes extends JFrame {
         };
 
         tabla = new JTable(modelo);
-        tabla.setBackground(new Color(255, 128, 128));
+        tabla.setBackground(new Color(255, 255, 255));
         tabla.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         tabla.setRowHeight(25);
 
@@ -63,7 +63,7 @@ public class VentanaVerRegistroHuespedes extends JFrame {
                 StringBuilder servicios = new StringBuilder();
                 for (Servicio s : h.getServiciosContratados()) {
                     if (s != null) {
-                        servicios.append(s.getNombre()).append(", ");
+                        servicios.append(s.getNombreClave()).append(", ");
                     }
                 }
                 if (servicios.length() > 0)

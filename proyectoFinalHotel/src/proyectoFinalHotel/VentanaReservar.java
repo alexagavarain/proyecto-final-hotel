@@ -10,45 +10,45 @@ import java.awt.event.ActionEvent;
 public class VentanaReservar extends JFrame {
 
     public VentanaReservar(Hotel hotel, Habitacion hab) {
-        getContentPane().setBackground(new Color(255, 128, 128));
-        setTitle("Reservar Habitación");
+        getContentPane().setBackground(new Color(238, 238, 238));
+        setTitle("Reservar habitación");
         setSize(409, 558);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setBounds(54, 20, 120, 20);
+        lblNombre.setBounds(49, 20, 120, 20);
         getContentPane().add(lblNombre);
 
         JTextField txtNombre = new JTextField();
-        txtNombre.setBounds(184, 20, 150, 20);
+        txtNombre.setBounds(127, 20, 207, 20);
         getContentPane().add(txtNombre);
 
         JLabel lblEdad = new JLabel("Edad:");
-        lblEdad.setBounds(54, 60, 120, 20);
+        lblEdad.setBounds(49, 60, 120, 20);
         getContentPane().add(lblEdad);
 
         JTextField txtEdad = new JTextField();
-        txtEdad.setBounds(184, 60, 150, 20);
+        txtEdad.setBounds(224, 60, 110, 20);
         getContentPane().add(txtEdad);
 
         JLabel lblTel = new JLabel("Teléfono:");
-        lblTel.setBounds(54, 100, 120, 20);
+        lblTel.setBounds(49, 100, 120, 20);
         getContentPane().add(lblTel);
 
         JTextField txtTel = new JTextField();
-        txtTel.setBounds(184, 100, 150, 20);
+        txtTel.setBounds(127, 100, 207, 20);
         getContentPane().add(txtTel);
 
         JLabel lblEmail = new JLabel("Email:");
-        lblEmail.setBounds(54, 131, 120, 20);
+        lblEmail.setBounds(49, 140, 120, 20);
         getContentPane().add(lblEmail);
 
         JTextField txtEmail = new JTextField();
-        txtEmail.setBounds(127, 131, 207, 20);
+        txtEmail.setBounds(127, 140, 207, 20);
         getContentPane().add(txtEmail);
 
-        JLabel lblMem = new JLabel("Membresía (CF / VIP):");
+        JLabel lblMem = new JLabel("Membresía (CF / VIP / N):");
         lblMem.setBounds(49, 180, 150, 20);
         getContentPane().add(lblMem);
 
@@ -56,18 +56,18 @@ public class VentanaReservar extends JFrame {
         txtMem.setBounds(224, 180, 110, 20);
         getContentPane().add(txtMem);
 
-        JLabel lblClave = new JLabel("Clave hab:");
+        JLabel lblClave = new JLabel("Clave:");
         lblClave.setBounds(49, 220, 120, 20);
         getContentPane().add(lblClave);
 
         JTextField txtClave = new JTextField();
-        txtClave.setBounds(184, 220, 150, 20);
+        txtClave.setBounds(224, 220, 110, 20);
 
         txtClave.setText(hab.getClave());
         txtClave.setEnabled(false);
         getContentPane().add(txtClave);
 
-        JLabel lblCant = new JLabel("Cantidad huéspedes:");
+        JLabel lblCant = new JLabel("No. huéspedes:");
         lblCant.setBounds(49, 251, 150, 20);
         getContentPane().add(lblCant);
 
@@ -75,12 +75,12 @@ public class VentanaReservar extends JFrame {
         txtCant.setBounds(224, 251, 110, 20);
         getContentPane().add(txtCant);
 
-        JLabel lblNoches = new JLabel("Noches:");
-        lblNoches.setBounds(54, 282, 120, 20);
+        JLabel lblNoches = new JLabel("No. noches:");
+        lblNoches.setBounds(49, 282, 120, 20);
         getContentPane().add(lblNoches);
 
         JTextField txtNoches = new JTextField();
-        txtNoches.setBounds(184, 282, 150, 20);
+        txtNoches.setBounds(224, 282, 110, 20);
         getContentPane().add(txtNoches);
 
         JButton btnReservar = new JButton("Reservar");
@@ -92,7 +92,7 @@ public class VentanaReservar extends JFrame {
         getContentPane().add(lblNewLabel);
         
         JButton btnALaHabitacion = new JButton("A la habitacion");
-        btnALaHabitacion.setBounds(48, 348, 110, 23);
+        btnALaHabitacion.setBounds(48, 348, 130, 23);
         getContentPane().add(btnALaHabitacion);
         
         JButton btnLavanderia = new JButton("Lavanderia");
@@ -100,15 +100,15 @@ public class VentanaReservar extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         	}
         });
-        btnLavanderia.setBounds(224, 348, 110, 23);
+        btnLavanderia.setBounds(224, 348, 130, 23);
         getContentPane().add(btnLavanderia);
         
         JButton btnSpa = new JButton("Spa");
-        btnSpa.setBounds(48, 384, 110, 23);
+        btnSpa.setBounds(48, 384, 130, 23);
         getContentPane().add(btnSpa);
         
         JButton btnTour = new JButton("Tour");
-        btnTour.setBounds(224, 384, 110, 23);
+        btnTour.setBounds(224, 384, 130, 23);
         getContentPane().add(btnTour);
 
         HashMap<JButton, Servicio> mapaServicios = new HashMap<>();
@@ -127,7 +127,6 @@ public class VentanaReservar extends JFrame {
         for (JButton b : mapaServicios.keySet()) {
             b.setBackground(Color.LIGHT_GRAY);
             b.setOpaque(true);
-            b.setBorderPainted(false);
         }
 
         for (JButton btnServ : mapaServicios.keySet()) {

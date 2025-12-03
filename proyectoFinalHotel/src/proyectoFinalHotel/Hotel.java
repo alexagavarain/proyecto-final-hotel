@@ -3,10 +3,9 @@ package proyectoFinalHotel;
 public class Hotel {
 	
 	private Habitacion[][] habitaciones = new Habitacion[4][5];
-	private Huesped[] registroHuespedes = new Huesped[20];;
+	private Huesped[] registroHuespedes = new Huesped[2000];;
 	private double ingresosHabitaciones = 0;
 	private double ingresosServicios = 0;
-
 	private double ingresosTotales = 0;
 	
 	RegistroIngresos registro = new RegistroIngresos();
@@ -83,7 +82,10 @@ public class Hotel {
 		Habitacion habitacion = buscarHabitacion(clave);
 		
 		if (habitacion != null && !habitacion.isReservada()) {
-			return habitacion.reservar(huesped, cantidadHuespedes, cantidadNoches) && agregarHuesped(huesped);
+			if (habitacion.reservar(huesped, cantidadHuespedes, cantidadNoches)) {
+				agregarHuesped(huesped);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -117,7 +119,10 @@ public class Hotel {
 		Habitacion habitacion = buscarHabitacion(clave);
 
 		if (habitacion != null && confirmarHuesped(huesped, clave) && habitacion.isOcupada()) {
-			return cobrar(huesped, clave) && habitacion.desocupar();
+			if(cobrar(huesped, clave)) {
+				huesped.darDeBaja();
+				return habitacion.desocupar();
+			}
 		}
 		return false;
 	}
@@ -160,10 +165,18 @@ public class Hotel {
 	    
 	    ingresosTotales += total;
 
-	    huesped.darDeBaja();
-	    eliminarHuesped(huesped);
-
 	    return true;
+	}
+	
+	public double calcularPrecio(Huesped huesped, String clave) {
+		Habitacion habitacion = buscarHabitacion(clave);
+		double costoHab = habitacion.calcularCosto();
+	    double costoServ = huesped.calcularCostoServicios();
+
+	    double total = costoHab + costoServ;
+	    total -= (total * huesped.porcentajeDescuento());
+	    
+	    return total;
 	}
 
 	public void eliminarHuesped(Huesped huesped) {
@@ -175,41 +188,6 @@ public class Hotel {
 		}
 		
 	}
-	
-	public void verIngresosTotales() {
-		registro.imprimirRegistro();
-		
-		System.out.println("------------");
-
-//	    double totalTerraza = 0;
-//	    double totalJardinPrivado = 0;
-//	    double totalVistaAlberca = 0;
-//	    double totalVistaAlMar = 0;
-//	    double totalServicios = 0;
-//
-//	    for (int i = 0; i < habitaciones.length; i++) {
-//	        for (int j = 0; j < habitaciones[i].length; j++) {
-//	            
-//	            Habitacion h = habitaciones[i][j];
-//
-//	            if (h instanceof Terraza)
-//	                totalTerraza += h.getIngresosGenerados();
-//	            else if (h instanceof JardinPrivado)
-//	                totalJardinPrivado += h.getIngresosGenerados();
-//	            else if (h instanceof VistaAlberca)
-//	                totalVistaAlberca += h.getIngresosGenerados();
-//	            else if (h instanceof VistaAlMar)
-//	                totalVistaAlMar += h.getIngresosGenerados();
-//	        }
-//	    }
-//
-//	    System.out.println("HABITACIONES\n Vista alberca: " + totalVistaAlberca +
-//	                        "\n Jardin privado: " + totalJardinPrivado +
-//	                        "\n Vista al mar: " + totalVistaAlMar +
-//	                        "\n Terraza: " + totalTerraza +
-//	                        "\n\nSERVICIOS\n " + totalServicios);
-	}
-
 	
 	public Habitacion[][] getHabitaciones() {
 	    return habitaciones;
@@ -234,7 +212,5 @@ public class Hotel {
 	public void setIngresosTotales(double ingresosTotales) {
 		this.ingresosTotales = ingresosTotales;
 	}
-	
-
 
 }

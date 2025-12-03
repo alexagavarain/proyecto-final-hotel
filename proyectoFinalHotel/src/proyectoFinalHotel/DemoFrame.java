@@ -9,21 +9,25 @@ public class DemoFrame extends JFrame {
     private Hotel hotel = new Hotel();
 
     public DemoFrame() {
-    	getContentPane().setBackground(new Color(255, 128, 128));
-        setTitle("Sistema de Hotel");
+    	getContentPane().setBackground(new Color(238, 238, 238));
+        setTitle("Sistema de gestión de hotel");
         setSize(721, 505);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         
         JButton btnCheckIn = new JButton("Check-In");
+        btnCheckIn.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnCheckIn.setBounds(54, 230, 261, 49);
         JButton btnCheckOut = new JButton("Check-Out");
+        btnCheckOut.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnCheckOut.setBounds(393, 230, 256, 49);
-        JButton btnDisponibilidad = new JButton("Ver disponibilidad");
+        JButton btnDisponibilidad = new JButton("Disponibilidad");
+        btnDisponibilidad.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnDisponibilidad.setBounds(59, 290, 256, 49);
         
-        JButton btnRegistro = new JButton("Ver registro de huéspedes");
+        JButton btnRegistro = new JButton("Registro de huéspedes");
+        btnRegistro.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnRegistro.setBounds(59, 358, 256, 49);
         getContentPane().setLayout(null);
 
@@ -33,18 +37,24 @@ public class DemoFrame extends JFrame {
         getContentPane().add(btnDisponibilidad);
         getContentPane().add(btnRegistro);
         
-        JButton btnBuscarHuesped = new JButton("Buscar huesped");
+        JButton btnBuscarHuesped = new JButton("Buscar huésped");
+        btnBuscarHuesped.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnBuscarHuesped.setBounds(393, 290, 261, 49);
         getContentPane().add(btnBuscarHuesped);
         
-        JButton btnVerIngresos = new JButton("Ver ingresos");
+        JButton btnVerIngresos = new JButton("Ingresos");
+        btnVerIngresos.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnVerIngresos.setBounds(393, 358, 261, 49);
         getContentPane().add(btnVerIngresos);
         
-        JLabel lblNewLabel = new JLabel("Sistema de hotel");
-        lblNewLabel.setFont(new Font("Tw Cen MT Condensed", Font.BOLD | Font.ITALIC, 50));
-        lblNewLabel.setBounds(216, 68, 323, 79);
+        JLabel lblNewLabel = new JLabel("Hotel Descanso");
+        lblNewLabel.setFont(new Font("Monospaced", Font.BOLD, 37));
+        lblNewLabel.setBounds(210, 68, 323, 79);
         getContentPane().add(lblNewLabel);
+        JLabel lblNewLabel2 = new JLabel("Sistema de gestión");
+        lblNewLabel2.setFont(new Font("Monospaced", Font.PLAIN, 25));
+        lblNewLabel2.setBounds(230,120, 323, 79);
+        getContentPane().add(lblNewLabel2);
 
         // Abrir ventanas
         btnCheckIn.addActionListener(e -> new VentanaCheckIn(hotel));

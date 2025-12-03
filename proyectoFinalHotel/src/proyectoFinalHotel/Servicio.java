@@ -4,12 +4,22 @@ public class Servicio {
 	
 	protected String nombre;
 	protected double costo;
+	protected String nombreClave;
 	
-	public Servicio(String nombre, double costo) {
+	public Servicio(String nombre, String nombreClave, double costo) {
 		this.nombre = nombre;
+		this.nombreClave = nombreClave;
 		this.costo = costo;
 	}
 	
+	public String getNombreClave() {
+		return nombreClave;
+	}
+
+	public void setNombreClave(String nombreClave) {
+		this.nombreClave = nombreClave;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

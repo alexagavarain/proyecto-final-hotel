@@ -129,7 +129,7 @@ public class MainHotel {
 
                     if(miHotel.checkOut(seVaHuesped, claveSeVa)) {
                         System.out.println("Check-out correcto.");
-                    		registro.imprimirRegistro();
+                    		System.out.println(miHotel.calcularPrecio(seVaHuesped, claveSeVa));
                     }
                     else {
                         System.out.println("No se pudo realizar check-out.");
@@ -141,7 +141,7 @@ public class MainHotel {
                     break;
 
                 case 7:
-                	miHotel.verIngresosTotales();
+//                	miHotel.verIngresosTotales();
                     break;
 
                 case 8:

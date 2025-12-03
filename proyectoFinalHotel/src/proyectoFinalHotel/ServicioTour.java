@@ -3,6 +3,6 @@ package proyectoFinalHotel;
 public class ServicioTour extends Servicio {
 
 	public ServicioTour() {
-		super("Tour", 900);
+		super("Tour", "T", 900);
 	}
 }

@@ -18,7 +18,7 @@ public class Terraza extends Habitacion {
 
 	public double calcularCosto() {
 		double costo = super.calcularCosto();
-		costo += costo*extraVista;
+		costo += extraVista;
 		return costo;
 	}
 

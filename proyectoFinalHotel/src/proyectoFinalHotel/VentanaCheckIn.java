@@ -18,7 +18,7 @@ public class VentanaCheckIn extends JFrame {
         txtNombre.setBounds(120, 20, 130, 20);
         add(txtNombre);
 
-        JLabel lblClave = new JLabel("Clave hab:");
+        JLabel lblClave = new JLabel("Clave:");
         lblClave.setBounds(20, 60, 100, 20);
         add(lblClave);
 
@@ -35,7 +35,7 @@ public class VentanaCheckIn extends JFrame {
             if (h != null && hotel.checkIn(h, txtClave.getText())) {
                 JOptionPane.showMessageDialog(null, "Check-in realizado");
             } else {
-                JOptionPane.showMessageDialog(null, "Error en check-in");
+                JOptionPane.showMessageDialog(null, "No se pudo hacer check-in");
             }
             dispose();
         });
