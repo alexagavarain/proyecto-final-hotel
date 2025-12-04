@@ -139,7 +139,8 @@ public class Hotel {
 		Habitacion habitacion = buscarHabitacion(clave);
 		
 		if (habitacion != null && !habitacion.isReservada()) {
-			if (agregarHuesped(huesped) && habitacion.reservar(huesped, cantidadHuespedes, cantidadNoches)) {
+			if (habitacion.reservar(huesped, cantidadHuespedes, cantidadNoches)) {
+				agregarHuesped(huesped);
 				return true;
 			}
 		}

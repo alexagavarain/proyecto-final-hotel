@@ -47,6 +47,10 @@ public class VentanaVerDisponibilidad extends JFrame {
                 JLabel lblTipo = new JLabel(h.getTipo());
                 lblTipo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
                 lblTipo.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                JLabel lblCapacidad = new JLabel(String. valueOf(h.getOcupacionMaxima()) + " personas");
+                lblCapacidad.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                lblCapacidad.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 JLabel lblEstado = new JLabel(h.isReservada() ? "RESERVADA" : "DISPONIBLE");
                 lblEstado.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -58,10 +62,11 @@ public class VentanaVerDisponibilidad extends JFrame {
                 panelEstado.setBackground(h.isReservada() ? new Color(200, 50, 50) : new Color(60, 170, 60));
                 panelEstado.add(lblEstado);
 
-                tarjeta.add(Box.createVerticalStrut(20));
+                tarjeta.add(Box.createVerticalStrut(8));
                 tarjeta.add(lblClave);
                 tarjeta.add(Box.createVerticalStrut(5));
                 tarjeta.add(lblTipo);
+                tarjeta.add(lblCapacidad);
                 tarjeta.add(Box.createVerticalStrut(10));
                 tarjeta.add(panelEstado);
 
