@@ -42,17 +42,17 @@ public class VentanaCheckOut extends JFrame {
             }
             
             String clave = txtClave.getText();
-    		double cantidadCobrar = hotel.cobrar(h, clave);
-            
-    		if (hotel.checkOut(h, clave)) {
-                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo hacer check-out");
-            }
-            dispose();
-        });
-
-        setVisible(true);
+	    		double cantidadCobrar = hotel.cobrar(h, clave);
+	            
+	    		if (hotel.checkOut(h, clave)) {
+	                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
+	            } else {
+	                JOptionPane.showMessageDialog(null, "No se pudo hacer check-out");
+	            }
+	            dispose();
+	        });
+	
+	        setVisible(true);
     }
 }
 

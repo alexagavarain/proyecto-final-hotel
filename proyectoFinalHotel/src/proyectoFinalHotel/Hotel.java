@@ -228,7 +228,7 @@ public class Hotel {
 		boolean habitacionASuNombre = false;
 		for (int i = 0; i < habitaciones.length; i++) {
 			for (int j = 0; j < habitaciones[i].length; j++) {
-				if (habitaciones[i][j] != null && habitaciones[i][j] != null
+				if (habitaciones[i][j] != null && habitaciones[i][j].getHuespedTitular() != null
 					&& habitaciones[i][j].getHuespedTitular().comparar(huesped)) {
 					habitacionASuNombre = true;
 					break;
