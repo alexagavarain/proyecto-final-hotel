@@ -8,7 +8,6 @@ public class MainHotel {
 
         Scanner in = new Scanner(System.in);
 
-        RegistroIngresos registro = new RegistroIngresos();
         Hotel miHotel = new Hotel();
 
         boolean salir = false;
@@ -129,7 +128,7 @@ public class MainHotel {
 
                     if(miHotel.checkOut(seVaHuesped, claveSeVa)) {
                         System.out.println("Check-out correcto.");
-                    		System.out.println(miHotel.calcularPrecio(seVaHuesped, claveSeVa));
+                    		System.out.println(miHotel.cobrar(seVaHuesped, claveSeVa));
                     }
                     else {
                         System.out.println("No se pudo realizar check-out.");

@@ -114,10 +114,10 @@ public class VentanaReservar extends JFrame {
         HashMap<JButton, Servicio> mapaServicios = new HashMap<>();
         ArrayList<Servicio> serviciosSeleccionados = new ArrayList<>();
 
-        Servicio sHab = new ServicioALaHabitacion();
-        Servicio sLav = new ServicioLavanderia();
-        Servicio sSpa = new ServicioSpa();
-        Servicio sTour = new ServicioTour();
+        Servicio sHab = new Servicio("Servicio a la habitación", "SH", 300);
+        Servicio sLav = new Servicio("Lavandería", "L", 700);
+        Servicio sSpa = new Servicio("Spa", "SP", 500);
+        Servicio sTour = new Servicio("Tour", "T", 900);
 
         mapaServicios.put(btnALaHabitacion, sHab);
         mapaServicios.put(btnLavanderia, sLav);

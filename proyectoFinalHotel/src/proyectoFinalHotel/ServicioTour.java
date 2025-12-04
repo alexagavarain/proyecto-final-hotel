@@ -1,8 +1,8 @@
-package proyectoFinalHotel;
-
-public class ServicioTour extends Servicio {
-
-	public ServicioTour() {
-		super("Tour", "T", 900);
-	}
-}
+//package proyectoFinalHotel;
+//
+//public class ServicioTour extends Servicio {
+//
+//	public ServicioTour() {
+//		super("Tour", "T", 900);
+//	}
+//}

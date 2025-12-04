@@ -16,6 +16,7 @@ public class Terraza extends Habitacion {
 		this.extraVista = extraVista;
 	}
 
+	@Override
 	public double calcularCosto() {
 		double costo = super.calcularCosto();
 		costo += extraVista;

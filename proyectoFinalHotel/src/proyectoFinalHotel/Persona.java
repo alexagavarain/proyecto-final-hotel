@@ -49,14 +49,7 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	public boolean comparar(Persona personaBuscar) {
-		return nombre.equals(personaBuscar.getNombre()) && email.equals(personaBuscar.getEmail());
-	}
-	
 	public String toString() {
-		if (nombre.equals("Sin titular")) {
-			return "Sin titular";
-		}
 		return " Nombre: " + nombre +
 				"\n Edad: " + edad +
 				"\n Telefono: " + telefono +

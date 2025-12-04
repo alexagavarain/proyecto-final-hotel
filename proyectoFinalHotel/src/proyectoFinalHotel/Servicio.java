@@ -2,9 +2,9 @@ package proyectoFinalHotel;
 
 public class Servicio {
 	
-	protected String nombre;
-	protected double costo;
-	protected String nombreClave;
+	private String nombre;
+	private double costo;
+	private String nombreClave;
 	
 	public Servicio(String nombre, String nombreClave, double costo) {
 		this.nombre = nombre;
@@ -37,8 +37,7 @@ public class Servicio {
 	}
 	
 	public String toString() {
-		return " Nombre: " + nombre +
-				"\n Costo: $" + costo;
+		return " Nombre: " + nombre + "  |  Costo: $" + costo;
 	}
 
 }

@@ -2,9 +2,9 @@ package proyectoFinalHotel;
 
 public class Huesped extends Persona {
 	
-	String tipoMembresia;
-	Servicio[] serviciosContratados;
-	int numServicios;
+	private String tipoMembresia;
+	private Servicio[] serviciosContratados;
+	private int numServicios;
 	
 	public Huesped(String nombre, int edad, String telefono, String email, String tipoMembresia) {
 		super(nombre, edad, telefono, email);
@@ -48,13 +48,11 @@ public class Huesped extends Persona {
 	}
 	
 	public boolean contratarServicio(Servicio servicio) {
-		if (numServicios < 100) {
-			for (int i = 0; i < serviciosContratados.length; i++) {
-				if (serviciosContratados[i] == null) {
-					serviciosContratados[i] = servicio;
-					numServicios++;
-					return true;
-				}
+		for (int i = 0; i < serviciosContratados.length; i++) {
+			if (serviciosContratados[i] == null) {
+				serviciosContratados[i] = servicio;
+				numServicios++;
+				return true;
 			}
 		}
 		return false;
@@ -82,18 +80,18 @@ public class Huesped extends Persona {
 	    return resultado;
 	}
 	
-	public void darDeBaja() {
-		for (int i = 0; i < serviciosContratados.length; i++) {
-			serviciosContratados[i] = null; 				
-		}
-		numServicios = 0;
+	public boolean comparar(Huesped huespedBuscar) {
+		return nombre.equals(huespedBuscar.getNombre()) && email.equals(huespedBuscar.getEmail()) && edad == huespedBuscar.getEdad();
 	}
-	
 
 	@Override
 	public String toString() {
-		return  nombre + "   |   " + edad + "   |   " + telefono + "   |   " + email + "   |   "+ tipoMembresia + "   |   " + mostrarServiciosContratados() + "   |   " + numServicios;
-		
+		return  "Nombre: " + nombre +
+				"\n Edad: " + edad + 
+				"\n Teléfono: " + telefono +
+				"\n Email: " + email +
+				"\n Membresía: " + tipoMembresia + 
+				"\n Servicios: " + mostrarServiciosContratados();		
 	}
 	
 }

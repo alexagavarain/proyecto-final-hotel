@@ -15,11 +15,11 @@ public class VistaAlberca extends Habitacion {
 	public void setExtraVista(double extraVista) {
 		this.extraVista = extraVista;
 	}
-
+	
+	@Override
 	public double calcularCosto() {
 		double costo = super.calcularCosto();
 		costo += extraVista;
-
 		return costo;
 	}
 

@@ -66,8 +66,9 @@ public class VentanaVerRegistroHuespedes extends JFrame {
                         servicios.append(s.getNombreClave()).append(", ");
                     }
                 }
-                if (servicios.length() > 0)
+                if (servicios.length() > 0) {
                     servicios.setLength(servicios.length() - 2); 
+                }
 
                 Object[] fila = {
                         h.getNombre(),

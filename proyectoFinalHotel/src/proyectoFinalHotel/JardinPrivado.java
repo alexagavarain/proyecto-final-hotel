@@ -16,6 +16,7 @@ public class JardinPrivado extends Habitacion {
 		this.extraAcceso = extraAcceso;
 	}
 
+	@Override
 	public double calcularCosto() {
 		double costo = super.calcularCosto();
 		costo += extraAcceso;

@@ -38,66 +38,74 @@ public class VentanaBuscarHuesped extends JFrame {
 
         String[] columnas = {"Nombre", "Edad", "Teléfono", "Email", "Membresía", "Servicios"};
 
-        	modelo = new DefaultTableModel(columnas, 0) {
-        	    @Override
-        	    public boolean isCellEditable(int row, int col) {
-        	        return false;
-        	    }
-        	};
+        modelo = new DefaultTableModel(columnas, 0) {
+	        @Override
+	        public boolean isCellEditable(int row, int col) {
+	        	return false;
+	        }
+        };
 
-        	tabla = new JTable(modelo);
-        	tabla.setRowHeight(25);
-        	tabla.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    	tabla = new JTable(modelo);
+    	tabla.setRowHeight(25);
+    	tabla.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-        	JScrollPane scroll = new JScrollPane(tabla);
-        	scroll.setBounds(40, 120, 400, 200);
-        	getContentPane().add(scroll);
+    	JScrollPane scroll = new JScrollPane(tabla);
+    	scroll.setBounds(40, 120, 400, 200);
+    	getContentPane().add(scroll);
 
-        	btnBuscar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                buscarHuesped();
-            }
-        });
+    	btnBuscar.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            buscarHuesped();
+	        }
+    	});
 
         setVisible(true);
     }
     
+    //TODO imprimir el arreglo del metodo buscadorHuespedes() en vez de buscarHuesped()
     private void buscarHuesped() {
-        String nombreBuscado = campoNombre.getText().trim();
+        String nombreBuscado = campoNombre.getText();
 
         if (nombreBuscado.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Escribe un nombre.");
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre");
             return;
         }
         
         modelo.setRowCount(0);
-        Huesped h = hotel.buscarHuesped(nombreBuscado);
 
-        if (h == null) {
+        Huesped[] buscador = hotel.buscadorHuespedes(nombreBuscado);
+        
+        if (buscador.length == 0) {
             JOptionPane.showMessageDialog(null, "Huésped no encontrado");
             dispose();
             return;
         }
 
-        StringBuilder servicios = new StringBuilder();
-        for (Servicio s : h.getServiciosContratados()) {
-            if (s != null) {
-                servicios.append(s.getNombreClave()).append(", ");
+        for (Huesped h : buscador) {
+            if (h != null) {
+                
+            	StringBuilder servicios = new StringBuilder();
+                for (Servicio s : h.getServiciosContratados()) {
+                    if (s != null) {
+                        servicios.append(s.getNombreClave()).append(", ");
+                    }
+                }
+                if (servicios.length() > 0) {
+                    servicios.setLength(servicios.length() - 2); 
+                }
+
+                Object[] fila = {
+                        h.getNombre(),
+                        h.getEdad(),
+                        h.getTelefono(),
+                        h.getEmail(),
+                        h.getTipoMembresia(),
+                        servicios.toString()
+                };
+
+                modelo.addRow(fila);
             }
         }
-        if (servicios.length() > 0)
-            servicios.setLength(servicios.length() - 2); 
 
-        Object[] fila = {
-                h.getNombre(),
-                h.getEdad(),
-                h.getTelefono(),
-                h.getEmail(),
-                h.getTipoMembresia(),
-                servicios.toString()
-        };
-
-        modelo.addRow(fila);
     }
 }
-

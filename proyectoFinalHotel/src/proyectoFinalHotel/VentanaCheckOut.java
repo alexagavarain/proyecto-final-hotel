@@ -42,7 +42,7 @@ public class VentanaCheckOut extends JFrame {
             }
             
             String clave = txtClave.getText();
-    		double cantidadCobrar = hotel.calcularPrecio(h, clave);
+    		double cantidadCobrar = hotel.cobrar(h, clave);
             
     		if (hotel.checkOut(h, clave)) {
                 JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);

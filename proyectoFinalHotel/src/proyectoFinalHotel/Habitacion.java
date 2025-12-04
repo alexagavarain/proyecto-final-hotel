@@ -17,7 +17,6 @@ public abstract class Habitacion {
 		this.clave = clave;
 		this.ocupacionMaxima = ocupacionMaxima;
 		this.precioPorNoche = precioPorNoche;
-		this.huespedTitular = null; 
 	}
 	
 	public String getTipo() {
@@ -90,27 +89,26 @@ public abstract class Habitacion {
 				reservada = true;
 				cantidadNoches = noches;
 				this.huespedTitular = huespedTitular;
-				return true;
-				
+				return true;	
 			}
 		}
 		return false;
 	}
 	
-	public boolean ocupar() {
-		if (reservada) {
+	public boolean ocupar(Huesped huespedTitular) {
+		if (reservada && this.huespedTitular.comparar(huespedTitular)) {
 			ocupada = true;
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean desocupar() {
-		if (ocupada) {
-			reservada = false;
-			ocupada = false;
-	        cantidadNoches = 0;
-	        huespedTitular = null;
+	public boolean desocupar(Huesped huespedTitular) {
+		if (ocupada && this.huespedTitular.comparar(huespedTitular)) {
+			this.reservada = false;
+			this.ocupada = false;
+	        this.cantidadNoches = 0;
+	        this.huespedTitular = null;
 	        return true;
 		}
 		return false;

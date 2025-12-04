@@ -1,8 +1,8 @@
-package proyectoFinalHotel;
-
-public class ServicioSpa extends Servicio {
-
-	public ServicioSpa() {
-		super("Spa", "SP", 500);
-	}
-}
+//package proyectoFinalHotel;
+//
+//public class ServicioSpa extends Servicio {
+//
+//	public ServicioSpa() {
+//		super("Spa", "SP", 500);
+//	}
+//}
