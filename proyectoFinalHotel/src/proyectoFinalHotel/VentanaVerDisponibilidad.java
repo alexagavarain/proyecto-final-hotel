@@ -8,6 +8,10 @@ public class VentanaVerDisponibilidad extends JFrame {
     private Hotel hotel;
 
     public VentanaVerDisponibilidad(Hotel hotel) {
+    	
+    	/**
+    	 * Se crea la ventana y el como se va a ver.
+    	 * */
         getContentPane().setBackground(new Color(238, 238, 238));
         this.hotel = hotel;
 
@@ -22,17 +26,29 @@ public class VentanaVerDisponibilidad extends JFrame {
         titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(titulo, BorderLayout.NORTH);
 
+        /**
+         * Crea el panel donde se van a agregar las tarjetas de las habitaciones.
+         * */
         JPanel panelGrid = new JPanel();
         panelGrid.setBackground(new Color(238, 238, 238));
         panelGrid.setLayout(new GridLayout(4, 5, 10, 10));
         panelGrid.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         getContentPane().add(panelGrid, BorderLayout.CENTER);
 
+        /**
+         * Se crea la matriz de habitaciones.
+         * */
         Habitacion[][] habs = hotel.getHabitaciones();
 
+        /**
+         * Recorre toda la matriz.
+         * */
         for (int i = 0; i < habs.length; i++) {
             for (int j = 0; j < habs[i].length; j++) {
 
+            	/**
+            	 * Crea un objeto habitacion y le crea una tarjeta con los datos de la misma.
+            	 * */
                 Habitacion h = habs[i][j];
 
                 JPanel tarjeta = new JPanel();
@@ -70,6 +86,9 @@ public class VentanaVerDisponibilidad extends JFrame {
                 tarjeta.add(Box.createVerticalStrut(10));
                 tarjeta.add(panelEstado);
 
+                /**
+                 * Si la habitación no está reservada agrega un boton para que pueda reservarse.
+                 * */
                 if (!h.isReservada()) {
                     JButton btnReservar = new JButton("Reservar");
                     btnReservar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -85,6 +104,10 @@ public class VentanaVerDisponibilidad extends JFrame {
                     tarjeta.add(btnReservar);
                 }
 
+                /**
+                 * Se agrega la tarjeta al panel.
+                 * */
+                
                 panelGrid.add(tarjeta);
             }
         }

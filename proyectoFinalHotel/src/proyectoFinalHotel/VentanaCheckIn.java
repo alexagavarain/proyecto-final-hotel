@@ -10,6 +10,9 @@ public class VentanaCheckIn extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
 
+        /**
+         * Se crean los botones y los labels que se verán en pantalla.
+         * */
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setBounds(20, 20, 100, 20);
         add(lblNombre);
@@ -30,8 +33,19 @@ public class VentanaCheckIn extends JFrame {
         btn.setBounds(80, 110, 120, 30);
         add(btn);
 
+        /**
+         * Se le agrega la acción al boton de check in
+         * */
         btn.addActionListener(e -> {
+        	
+        	/**
+        	 * Se crea un huesped con que se busca en el hotel.
+        	 * */
             Huesped h = hotel.buscarHuesped(txtNombre.getText());
+            
+            /**
+             * Si el huesped es diferente a null y el check in regresa un true sale un mensaje de que se realizó.
+             * */
             if (h != null && hotel.checkIn(h, txtClave.getText())) {
                 JOptionPane.showMessageDialog(null, "Check-in realizado");
             } else {

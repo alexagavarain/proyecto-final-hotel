@@ -87,9 +87,9 @@ public class VentanaReservar extends JFrame {
         btnReservar.setBounds(128, 446, 120, 30);
         getContentPane().add(btnReservar);
         
-        JLabel lblNewLabel = new JLabel("Servicio extra:");
-        lblNewLabel.setBounds(158, 313, 110, 14);
-        getContentPane().add(lblNewLabel);
+        JLabel lblServicioExtra = new JLabel("Servicio extra:");
+        lblServicioExtra.setBounds(158, 313, 110, 14);
+        getContentPane().add(lblServicioExtra);
         
         JButton btnALaHabitacion = new JButton("A la habitacion");
         btnALaHabitacion.setBounds(48, 348, 130, 23);
@@ -111,35 +111,57 @@ public class VentanaReservar extends JFrame {
         btnTour.setBounds(224, 384, 130, 23);
         getContentPane().add(btnTour);
 
+        
+        /**
+         * Creamos un hashmap con todos los servicios y una lista con los servicios que va a seleccionar el cliente.
+         * */
         HashMap<JButton, Servicio> mapaServicios = new HashMap<>();
         ArrayList<Servicio> serviciosSeleccionados = new ArrayList<>();
+        
+        
 
+        /**
+         * Creamos los servicios, cada uno con su nombre, código y precio.
+         * */
         Servicio sHab = new Servicio("Servicio a la habitación", "SH", 300);
         Servicio sLav = new Servicio("Lavandería", "L", 700);
         Servicio sSpa = new Servicio("Spa", "SP", 500);
         Servicio sTour = new Servicio("Tour", "T", 900);
 
+        
+        /**
+         * A cada boton se le relaciona un servicio.
+         * */
         mapaServicios.put(btnALaHabitacion, sHab);
         mapaServicios.put(btnLavanderia, sLav);
         mapaServicios.put(btnSpa, sSpa);
         mapaServicios.put(btnTour, sTour);
 
-        for (JButton b : mapaServicios.keySet()) {
-            b.setBackground(Color.LIGHT_GRAY);
-            b.setOpaque(true);
+        
+        
+        /**
+         * Recorremos los botones y los ponemos en gris.
+         * */
+        for (JButton botones : mapaServicios.keySet()) {
+            botones.setBackground(Color.LIGHT_GRAY);
+            botones.setOpaque(true);
         }
-
+        
+        
+        /**
+         * Se le asigna una acción a cada boton, si ya estaba seleccionado se le elimina y se vuelve gris, si no se asigna y se pone verde.
+         * */
         for (JButton btnServ : mapaServicios.keySet()) {
 
             btnServ.addActionListener(e -> {
 
-                Servicio s = mapaServicios.get(btnServ);
+                Servicio misServicios = mapaServicios.get(btnServ);
 
-                if (serviciosSeleccionados.contains(s)) {
-                    serviciosSeleccionados.remove(s);
+                if (serviciosSeleccionados.contains(misServicios)) {
+                    serviciosSeleccionados.remove(misServicios);
                     btnServ.setBackground(Color.LIGHT_GRAY);
                 } else {
-                    serviciosSeleccionados.add(s);
+                    serviciosSeleccionados.add(misServicios);
                     btnServ.setBackground(new Color(60, 170, 60)); 
                 }
             });
@@ -147,31 +169,44 @@ public class VentanaReservar extends JFrame {
 
         
         
+        /**
+         * Se le asigna la acción al botón de reservar.
+         * */
         
         btnReservar.addActionListener(e -> {
             try {
-
-                Huesped h = new Huesped(
+            	/**
+            	 * Crea un objeto huésped con los datos que ingresó el usuario.
+            	 * */
+                Huesped miHuesped = new Huesped(
                         txtNombre.getText(),
                         Integer.parseInt(txtEdad.getText()),
                         txtTel.getText(),
                         txtEmail.getText(),
                         txtMem.getText()
                 );
-
+                /**
+                 * Se recorren los servicios seleccionados por el usuario y se agregan al huesped.
+                 * */
                 for (Servicio s : serviciosSeleccionados) {
-                    h.contratarServicio(s);
+                    miHuesped.contratarServicio(s);
                 }
-
-                boolean ok = hotel.reservarHabitacion(
-                        h,
+                
+                /**
+                 * Creamos una variable que devuelva el booleano para saber si se pudo o no reservar la habitación.
+                 * */
+                boolean reservado = hotel.reservarHabitacion(
+                        miHuesped,
                         hab.getClave(),
                         Integer.parseInt(txtCant.getText()),
                         Integer.parseInt(txtNoches.getText())
                 );
 
-                if (ok) {
-                    double costoServicios = h.calcularCostoServicios();
+                /**
+                 * Si reservado es true se calculan los costos de los servicios y se presenta el mensaje, si es false se presenta un mensaje de que no se pudo reservar.
+                 * */
+                if (reservado) {
+                    double costoServicios = miHuesped.calcularCostoServicios();
                     JOptionPane.showMessageDialog(null, 
                         "Reservación realizada\n" +
                         "Servicios extra: $" + costoServicios

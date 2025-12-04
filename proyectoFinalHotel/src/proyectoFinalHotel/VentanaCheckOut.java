@@ -12,6 +12,10 @@ public class VentanaCheckOut extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
+        
+        /**
+         * Se crean los labels y botones que van a aparecer en la ventana.
+         * */
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setBounds(20, 20, 100, 20);
         getContentPane().add(lblNombre);
@@ -32,18 +36,34 @@ public class VentanaCheckOut extends JFrame {
         btn.setBounds(80, 110, 120, 30);
         getContentPane().add(btn);
 
+        
+        /**
+         * Se agrega una accion al botón.
+         * */
         btn.addActionListener(e -> {
+        	/**
+        	 * Se crea el huésped llamando a buscar huesped con el nombre dado.
+        	 * */
             Huesped h = hotel.buscarHuesped(txtNombre.getText());
             
+            /**
+             * Si el huésped es null se manda mensaje de que no se encontró.
+             * */
             if (h == null) {
             	JOptionPane.showMessageDialog(null, "Huésped no encontrado");
             	dispose();
             	return;
             }
             
+            /**
+             * Se crea una variable con la clave que dio el huésped, luego otra para sacar el monto que se va a cobrar.
+             * */
             String clave = txtClave.getText();
 	    		double cantidadCobrar = hotel.cobrar(h, clave);
 	            
+	    		/**
+	    		 * Si el check out devuelve un true, manda un mensaje de que se pudo realizar y la cantidad que se cobró.
+	    		 * */
 	    		if (hotel.checkOut(h, clave)) {
 	                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
 	            } else {
