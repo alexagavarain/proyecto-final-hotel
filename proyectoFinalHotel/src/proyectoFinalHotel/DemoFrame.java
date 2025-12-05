@@ -11,8 +11,6 @@ public class DemoFrame extends JFrame {
     /**
      * Con este método creamos la ventana que vamos a utilizar como menú.
      * */
-    
-    
     public DemoFrame() {
     	
     	getContentPane().setBackground(new Color(238, 238, 238));
