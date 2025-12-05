@@ -216,18 +216,16 @@ public class VentanaReservar extends JFrame {
                         "Reservación realizada\n" +
                         "Servicios extra: $" + costoServicios
                     );
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo reservar");
                 }
-
-                dispose();
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Datos inválidos");
             }
         });
  
-
         setVisible(true);
     }
 }

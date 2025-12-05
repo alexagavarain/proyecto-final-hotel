@@ -45,17 +45,17 @@ public class VentanaCheckIn extends JFrame {
         	/**
         	 * Se crea un huesped con que se busca en el hotel.
         	 * */
-            Huesped h = hotel.buscarHuesped(txtNombre.getText());
+            Huesped h = hotel.confirmarHuespedNombre(txtNombre.getText(), txtClave.getText());
             
             /**
              * Si el huesped es diferente a null y el check in regresa un true sale un mensaje de que se realizó.
              * */
             if (h != null && hotel.checkIn(h, txtClave.getText())) {
                 JOptionPane.showMessageDialog(null, "Check-in realizado");
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo hacer check-in");
             }
-            dispose();
         });
 
         setVisible(true);

@@ -118,7 +118,6 @@ public class VentanaBuscarHuesped extends JFrame {
          * */
         if (buscador.length == 0) {
             JOptionPane.showMessageDialog(null, "Huésped no encontrado");
-            dispose();
             return;
         }
 

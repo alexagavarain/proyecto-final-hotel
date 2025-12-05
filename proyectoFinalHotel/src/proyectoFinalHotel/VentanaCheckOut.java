@@ -47,16 +47,15 @@ public class VentanaCheckOut extends JFrame {
          * */
         btn.addActionListener(e -> {
         	/**
-        	 * Se crea el huésped llamando a buscar huesped con el nombre dado.
+        	 * Se crea el huésped llamando a confirmarHuespedNombre() con el nombre dado.
         	 * */
-            Huesped h = hotel.buscarHuesped(txtNombre.getText());
+            Huesped h = hotel.confirmarHuespedNombre(txtNombre.getText(), txtClave.getText());
             
             /**
              * Si el huésped es null se manda mensaje de que no se encontró.
              * */
             if (h == null) {
             	JOptionPane.showMessageDialog(null, "Huésped no encontrado");
-            	dispose();
             	return;
             }
             
@@ -64,20 +63,20 @@ public class VentanaCheckOut extends JFrame {
              * Se crea una variable con la clave que dio el huésped, luego otra para sacar el monto que se va a cobrar.
              * */
             String clave = txtClave.getText();
-	    		double cantidadCobrar = hotel.cobrar(h, clave);
 	            
-	    		/**
-	    		 * Si el check out devuelve un true, manda un mensaje de que se pudo realizar y la cantidad que se cobró.
-	    		 * */
-	    		if (hotel.checkOut(h, clave)) {
-	                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
-	            } else {
-	                JOptionPane.showMessageDialog(null, "No se pudo hacer check-out");
-	            }
-	            dispose();
-	        });
-	
-	        setVisible(true);
+    		/**
+    		 * Si el check out devuelve un true, manda un mensaje de que se pudo realizar y la cantidad que se cobró.
+    		 * */
+    		if (hotel.checkOut(h, clave)) {
+    			double cantidadCobrar = hotel.getUltimoCobro();
+                JOptionPane.showMessageDialog(null, "Check-out realizado\n" + "Cantidad a cobrar: $" + cantidadCobrar);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo hacer check-out");
+            }
+        });
+        
+	    setVisible(true);
     }
 }
 

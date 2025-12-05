@@ -13,6 +13,7 @@ public class Hotel {
 	private double ingresosHabitaciones = 0;
 	private double ingresosServicios = 0;
 	private double ingresosTotales = 0;
+	private double ultimoCobro = 0;
 		
 	/**
 	 * Constructor que se encarga de inicializar la matriz de habitaciones y llenarla, 
@@ -127,6 +128,22 @@ public class Hotel {
 	}
 	
 	/**
+	 * Método para obtener el valor del último cobro aplicado (para mostrar en la ventana de check-out).
+	 * @return ultimoCobro Costo del último cobro.
+	 * **/
+	public double getUltimoCobro() {
+		return ultimoCobro;
+	}
+
+	/**
+	 * Método para asignar el valor del último cobro aplicado (para mostrar en la ventana de check-out).
+	 * @param ultimoCobro Costo del último cobro.
+	 * **/
+	public void setUltimoCobro(double ultimoCobro) {
+		this.ultimoCobro = ultimoCobro;
+	}
+
+	/**
 	 * Método para imprimir el registro de huéspedes.
 	 * **/
 	public void verRegistroHuespedes() {
@@ -151,6 +168,23 @@ public class Hotel {
 			return habitacion.getHuespedTitular().comparar(huesped);
 		}
 		return false;
+	}
+	
+	/**
+	 * Método creado para la ventana de check-in. Valida que un huésped es el titular mediante el nombre
+	 * y devuelve al huésped.
+	 * @param nombre Nombre del huésped.
+	 * @param clave Clave de la habitación.
+	 * @return huesped Huésped titular.
+	 * **/
+	public Huesped confirmarHuespedNombre(String nombre, String clave) {
+		Habitacion habitacion = buscarHabitacion(clave);
+		if (habitacion != null && habitacion.getHuespedTitular() != null) {
+			if (habitacion.getHuespedTitular().getNombre().equalsIgnoreCase(nombre)) {
+				return habitacion.getHuespedTitular();
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -215,12 +249,29 @@ public class Hotel {
 	        	if (habitaciones[i][j] != null) {
 		            Huesped huesped = habitaciones[i][j].getHuespedTitular();
 		            if (huesped != null && huesped.getNombre().equalsIgnoreCase(nombre)) {
-						huespedesEncontrados[index++] = huesped;
+						if (!huespedDuplicadoBuscador(huespedesEncontrados, huesped)) {
+							huespedesEncontrados[index++] = huesped;
+						}
 					}
 	        	}
 	        }
 	    } 
 	    return huespedesEncontrados;
+	}
+	
+	/**
+	 * Método complementario de buscadorHuespedes() que se encarga de evitar repetidos en el arreglo de huéspedes encontrados.
+	 * @param huespedesEncontrados Arreglo de huéspedes encontrados.
+	 * @param huesped Huésped encontrado.
+	 * @return boolean Si está duplicado o no.
+	 * **/
+	public boolean huespedDuplicadoBuscador(Huesped[] huespedesEncontrados, Huesped huesped) {
+		for (int i = 0; i < huespedesEncontrados.length; i++) {
+			if (huespedesEncontrados[i] != null && huespedesEncontrados[i].comparar(huesped)) {
+				return true; 
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -246,13 +297,15 @@ public class Hotel {
 	
 	/**
 	 * Método que agrega un huésped al registro de huéspedes al reservar. Valida que el huésped no sea titular
-	 * de otra habitación para no añadirlo dos veces.
+	 * de otra habitación para no añadirlo dos veces, si es titular actualiza la membresía y servicios contratados.
 	 * @param huesped Huésped que se va a agregar.
 	 * @return boolean Si se agregó el huesped.
 	 * **/
 	public boolean agregarHuesped(Huesped huesped) {	
 		for (int i = 0; i < registroHuespedes.length; i++) {
 			if (registroHuespedes[i] != null && registroHuespedes[i].comparar(huesped)) {
+				registroHuespedes[i].setTipoMembresia(huesped.getTipoMembresia());
+				registroHuespedes[i].setServiciosContratados(huesped.getServiciosContratados());
 				return true;
 			}
 		}
@@ -343,6 +396,7 @@ public class Hotel {
 	    double total = costoHab + costoServ;
 	    total -= (total * huesped.porcentajeDescuento());
 
+	    ultimoCobro = total;
 	    ingresosHabitaciones += costoHab;
 	    ingresosServicios += costoServ;
 	    ingresosTotales += total;
