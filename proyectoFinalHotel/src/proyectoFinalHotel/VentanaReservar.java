@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
+/**
+ * La clase VentanaReservar se encarga de crear la ventana en la cual el usuario ingresa los datos para hacer su reservación.
+ * @author Erandeni Trujillo.
+ * */
+
 public class VentanaReservar extends JFrame {
 
     public VentanaReservar(Hotel hotel, Habitacion hab) {

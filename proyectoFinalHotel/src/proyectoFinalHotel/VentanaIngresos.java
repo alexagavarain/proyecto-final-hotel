@@ -8,6 +8,11 @@ import java.awt.Font;
 
 import javax.swing.table.DefaultTableModel;
 
+	/**
+	 * La clase VentanaIngresos genera la ventana en la cual se presentan los ingresos obtenidos por el hotel y aparece al momento de utilizar el botón correspondiente en el menú.
+	 * @author Erandeni Trujillo.
+	 * */
+
 public class VentanaIngresos extends JFrame {
 
     private Hotel hotel;

@@ -3,6 +3,11 @@ package proyectoFinalHotel;
 import javax.swing.*;
 import java.awt.*;
 
+
+	/**
+	 * La clase VentanaVerDisponibilidad se encarga de crear la ventana en la cual se muestra en forma de tablero las habitaciones del hotel disponibles para el usuario.
+	 * @author Erandeni Trujillo.
+	 * */
 public class VentanaVerDisponibilidad extends JFrame {
 
     private Hotel hotel;

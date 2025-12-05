@@ -3,6 +3,11 @@ package proyectoFinalHotel;
 import javax.swing.*;
 import java.awt.Color;
 
+
+	/**
+	 * La clase VentanaCheckOut se encarga de crear la ventana en la cual el usuario hace check out mediante el botón con el mismo nombre que se encuentra en el menú.
+	 * @author Erandeni Trujillo.
+	 * */
 public class VentanaCheckOut extends JFrame {
 
     public VentanaCheckOut(Hotel hotel) {

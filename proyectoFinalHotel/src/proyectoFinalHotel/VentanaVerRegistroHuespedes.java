@@ -4,6 +4,12 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+
+/**
+ * La clase VentanaVerRegistroHuespedes se encarga de crear la ventana que muestra los datos de los huéspedes el hotel en forma de tabla.
+ * @author Erandeni Trujillo
+ * */
+
 public class VentanaVerRegistroHuespedes extends JFrame {
 
     private Hotel hotel;
