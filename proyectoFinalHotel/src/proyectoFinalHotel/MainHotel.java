@@ -2,6 +2,9 @@ package proyectoFinalHotel;
 
 import java.util.Scanner;
 
+/**
+ * La clase MainHotel fue creada para hacer pruebas en consola con los métodos de Hotel. No es parte oficial del proyecto.
+ * **/
 public class MainHotel {
 
     public static void main(String[] args) {
@@ -140,7 +143,7 @@ public class MainHotel {
                     break;
 
                 case 7:
-//                	miHotel.verIngresosTotales();
+                	miHotel.getIngresosTotales();
                     break;
 
                 case 8:
