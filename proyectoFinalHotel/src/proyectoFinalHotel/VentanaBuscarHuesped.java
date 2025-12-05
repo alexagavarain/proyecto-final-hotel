@@ -6,6 +6,11 @@ import java.awt.Font;
 import java.awt.event.*;
 import java.awt.Color;
 
+	/**
+	 * La clase VentanaBuscarHuesped se encarga de crear la ventana que se abre al momento de utilizar el botón de buscar huésped que se encuentra en el menú.
+	 * @author Erandeni Trujillo.
+	 * */
+
 public class VentanaBuscarHuesped extends JFrame {
 
     private Hotel hotel;

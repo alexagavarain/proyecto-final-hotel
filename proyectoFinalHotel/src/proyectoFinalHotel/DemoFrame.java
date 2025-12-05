@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * La clase DemoFrame se encarga de crear la interfaz del menú inicial del sistema.
+ * @author Erandeni Trujillo
+ * */
 public class DemoFrame extends JFrame {
 
     private Hotel hotel = new Hotel();

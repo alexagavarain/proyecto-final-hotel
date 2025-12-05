@@ -2,6 +2,10 @@ package proyectoFinalHotel;
 
 import javax.swing.*;
 
+/**
+ * La clase VentanaCheckIn se encarga de crear la ventana en la cual el usuario hace check in mediante el botón con el mismo nombre que se encuentra en el menú.
+ * @author Erandeni Trujillo.
+ * */
 public class VentanaCheckIn extends JFrame {
 
     public VentanaCheckIn(Hotel hotel) {
