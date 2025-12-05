@@ -7,7 +7,7 @@ public class Hotel {
 	private double ingresosHabitaciones = 0;
 	private double ingresosServicios = 0;
 	private double ingresosTotales = 0;
-	
+		
 	//Llenar hotel de habitaciones
 	public Hotel() {
 		habitaciones[0][0] = new VistaAlberca("A1", 10, 3000);
